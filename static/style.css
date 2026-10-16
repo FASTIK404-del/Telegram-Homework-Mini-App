@@ -1621,6 +1621,30 @@ iframe {
     box-sizing: border-box;
 }
 
+/* Переносим звёздочки в правый нижний угол карточек */
+.feature-card {
+    position: relative;
+}
+
+.feature-card .feature-arrow {
+    position: absolute;
+    top: auto !important;
+    right: 18px !important;
+    bottom: 18px !important;
+    z-index: 2;
+}
+
+/* Текст не должен залезать на звёздочку */
+.feature-card .feature-text {
+    padding-right: 12px;
+}
+
+/* В нижних карточках оставляем место справа */
+.small-feature-card .feature-text {
+    padding-right: 42px;
+}
+
+
 
 
 
