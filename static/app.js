@@ -1,4 +1,4 @@
-const pageNames = ["home", "homework", "calendar", "grades", "profile", "dayHomework"];
+const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance'];
 
 
 function showSection(name) {
@@ -12,13 +12,7 @@ function showSection(name) {
     });
 
     // Остальные экраны
-    const sections = {
-        homework: "homeworkSection",
-        calendar: "calendarSection",
-        grades: "gradesSection",
-        profile: "profileSection",
-        dayHomework: "dayHomeworkSection"
-    };
+    const sections = {homework: "homeworkSection", calendar: "calendarSection", grades: "gradesSection", profile: "profileSection", dayHomework: "dayHomeworkSection", settings: "settingsSection", notifications: "notificationsSection", devices: "devicesSection",};
 
     Object.entries(sections).forEach(([sectionName, id]) => {
         const element = document.getElementById(id);

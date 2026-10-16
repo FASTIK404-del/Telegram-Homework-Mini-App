@@ -11,7 +11,7 @@
     <div class="app">
         <header class="header">
             <div class="logo" id="homeProfileAvatar"
-                onclick="showSection('profile')"
+                onclick="showSection('settings')"
                 title="Открыть профиль"
                 role="button"
                 tabindex="0">
@@ -297,6 +297,148 @@
     <div id="dayHomeworkList" class="homework-list"></div>
 </section>
 
+
+<section id="settingsSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('home')">
+        ← На главную
+    </button>
+
+    <div class="section-heading">
+        <h1>Настройки</h1>
+        <p>Настрой приложение под себя</p>
+    </div>
+
+    <div class="settings-menu">
+        <h2>Аккаунт</h2>
+
+        <button class="settings-menu-item"
+                type="button"
+                onclick="showSection('notifications')">
+            <span class="settings-menu-icon">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                    <path d="M10 21h4"/>
+                </svg>
+            </span>
+            <span class="settings-menu-title">Уведомления</span>
+            <span class="settings-menu-arrow">→</span>
+        </button>
+
+        <button class="settings-menu-item"
+                type="button"
+                onclick="showSection('devices')">
+            <span class="settings-menu-icon">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="13" rx="2"/>
+                    <path d="M8 21h8M12 17v4"/>
+                </svg>
+            </span>
+            <span class="settings-menu-title">Устройства</span>
+            <span class="settings-menu-arrow">→</span>
+        </button>
+
+        <button class="settings-menu-item"
+                type="button"
+                onclick="showSection('appearance')">
+            <span class="settings-menu-icon">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 3v9h9M7 7h.01M7 12h.01M7 17h.01"/>
+                </svg>
+            </span>
+            <span class="settings-menu-title">Оформление</span>
+            <span class="settings-menu-arrow">→</span>
+        </button>
+    </div>
+</section>
+
+<section id="notificationsSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('settings')">
+        ← К настройкам
+    </button>
+
+    <div class="section-heading">
+        <h1>Уведомления</h1>
+        <p>Настрой сообщения от бота</p>
+    </div>
+
+    <div class="settings-card">
+        <h2>Уведомления</h2>
+        <p class="settings-description">
+            Выбирай, какие сообщения получать от бота.
+        </p>
+
+        <label class="settings-option">
+            <span>
+                <strong>Начало урока</strong>
+                <small>Напоминание перед началом пары</small>
+            </span>
+            <input type="checkbox" checked>
+            <span class="settings-switch"></span>
+        </label>
+
+        <label class="settings-option">
+            <span>
+                <strong>Перерыв</strong>
+                <small>Сообщение о начале перерыва</small>
+            </span>
+            <input type="checkbox" checked>
+            <span class="settings-switch"></span>
+        </label>
+
+        <label class="settings-option">
+            <span>
+                <strong>Расписание утром</strong>
+                <small>Расписание на сегодня утром</small>
+            </span>
+            <input type="checkbox" checked>
+            <span class="settings-switch"></span>
+        </label>
+
+        <label class="settings-option">
+            <span>
+                <strong>Расписание вечером</strong>
+                <small>Расписание на следующий день вечером</small>
+            </span>
+            <input type="checkbox" checked>
+            <span class="settings-switch"></span>
+        </label>
+    </div>
+</section>
+
+<section id="devicesSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('settings')">
+        ← К настройкам
+    </button>
+    <div class="section-heading">
+        <h1>Устройства</h1>
+        <p>Управление подключёнными устройствами</p>
+    </div>
+    <div class="settings-card">
+        <p>Раздел пока в разработке.</p>
+    </div>
+</section>
+
+<section id="appearanceSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('settings')">
+        ← К настройкам
+    </button>
+    <div class="section-heading">
+        <h1>Оформление</h1>
+        <p>Внешний вид приложения</p>
+    </div>
+    <div class="settings-card">
+        <p>Настройки темы добавим позже.</p>
+    </div>
+</section>
+
+
         </main>
 
 
@@ -342,7 +484,7 @@
         <button class="nav-item"
                 type="button"
                 aria-label="Настройки"
-                onclick="showSection('profile')">
+                onclick="showSection('settings')">
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="14" cy="12.5" r="2.5"></circle>
                 <path d="m19.4 13.5 1.1.9-1.5 2.6-1.4-.5a7.8 7.8 0 0 1-1.7 1l-.2 1.5h-3l-.4-1.5a7.8 7.8 0 0 1-1.7-1l-1.4.5-1.5-2.6 1.1-.9a7.2 7.2 0 0 1 0-2l-1.1-.9 1.5-2.6 1.4.5a7.8 7.8 0 0 1 1.7-1l.4-1.5h3l.2 1.5a7.8 7.8 0 0 1 1.7 1l1.4-.5 1.5 2.6-1.1.9a7.2 7.2 0 0 1 0 2Z"></path>
