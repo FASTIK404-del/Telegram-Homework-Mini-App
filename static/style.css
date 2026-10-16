@@ -1684,3 +1684,32 @@ iframe {
     padding-top: 10px;
     padding-bottom: 28px;
 }
+/* Подсветка дня при наведении */
+.home-week-section .calendar-day:hover {
+    border-color: #35e6d5;
+    background: linear-gradient(145deg, #164641, #102625);
+    color: #52eadb;
+}
+
+/* Выбранный день остаётся подсвеченным */
+.home-week-section .calendar-day.active {
+    border-color: #35e6d5;
+    background: linear-gradient(145deg, #164641, #102625);
+    color: #52eadb;
+    box-shadow: 0 0 14px rgba(0, 255, 225, 0.12);
+}
+/* По умолчанию дни не подсвечены */
+.home-week-section .calendar-day {
+    border-color: rgba(53, 230, 213, 0.15);
+    background: #10191a;
+    color: #a6bcba;
+    box-shadow: none;
+}
+
+/* Подсвечиваем только выбранный день */
+.home-week-section .calendar-day.active {
+    border-color: #35e6d5;
+    background: linear-gradient(145deg, #164641, #102625);
+    color: #52eadb;
+    box-shadow: 0 0 14px rgba(0, 255, 225, 0.12);
+}

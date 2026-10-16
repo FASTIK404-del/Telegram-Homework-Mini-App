@@ -54,7 +54,11 @@ if (profileSection) {
     document.querySelectorAll(".nav-item").forEach((button, index) => {
         button.classList.toggle("active", pageNames[index] === name);
     });
-
+// При выходе из окна заданий убираем подсветку дней
+if (name !== "dayHomework") {
+    document.querySelectorAll("#homeWeekDays .calendar-day")
+        .forEach(button => button.classList.remove("active"));
+}
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -319,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderGrades();
 });
 
+
 function renderHomeWeek() {
     const container = document.getElementById("homeWeekDays");
     const weekLabel = document.getElementById("currentWeekLabel");
@@ -357,9 +362,8 @@ function renderHomeWeek() {
         button.type = "button";
         button.className = "calendar-day";
 
-        const isToday = date.toDateString() === today.toDateString();
-        button.classList.toggle("active", isToday);
-        button.classList.toggle("today", isToday);
+        // Не подсвечиваем ни один день автоматически
+        button.classList.remove("active", "today");
 
         const name = document.createElement("span");
         name.textContent = names[i];
@@ -372,6 +376,11 @@ function renderHomeWeek() {
         button.addEventListener("click", () => {
             selectedHomeDate = new Date(date);
             selectedCalendarDay = date.getDay();
+
+            container.querySelectorAll(".calendar-day").forEach(dayButton => {
+                dayButton.classList.toggle("active", dayButton === button);
+            });
+
             showSection("dayHomework");
         });
 
