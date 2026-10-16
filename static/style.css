@@ -1586,3 +1586,8 @@ iframe {
     word-break: normal;
     line-height: 1.3;
 }
+.feature-card > .feature-arrow {
+    font-size: 32px !important;
+    right: 14px !important;
+    bottom: 14px !important;
+}
