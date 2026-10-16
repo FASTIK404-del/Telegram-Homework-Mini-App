@@ -1100,3 +1100,65 @@ button {
         padding: 18px;
     }
 }
+
+/* Исправление горизонтального переполнения на телефонах */
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+.app {
+    width: 100%;
+    max-width: 560px;
+    min-width: 0;
+    margin-inline: auto;
+    box-sizing: border-box;
+}
+
+.app *,
+.app *::before,
+.app *::after {
+    box-sizing: border-box;
+}
+
+.feature-cards,
+.feature-card,
+.small-cards,
+.content-section,
+.profile-card {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.feature-card {
+    overflow: hidden;
+}
+
+.feature-text {
+    overflow-wrap: anywhere;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+@media (max-width: 560px) {
+    .app {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .bottom-nav {
+        width: calc(100% - 24px);
+        max-width: 520px;
+    }
+}
