@@ -1582,6 +1582,23 @@ iframe {
     right: 12px;
 }
 
+/* Сдвигаем текст внутри карточек влево */
+.feature-card .feature-text {
+    margin-left: 0;
+    padding-left: 8px;
+}
+
+/* В нижних карточках оставляем место для звёздочки */
+.small-feature-card .feature-text {
+    padding-right: 48px;
+}
+
+/* В большой карточке тоже сдвигаем текст */
+.homework-card .feature-text {
+    padding-left: 8px;
+}
+
+
 
 
 
