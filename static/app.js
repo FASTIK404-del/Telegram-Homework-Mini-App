@@ -12,7 +12,18 @@ function showSection(name) {
     });
 
     // Остальные экраны
-    const sections = {homework: "homeworkSection", calendar: "calendarSection", grades: "gradesSection", profile: "profileSection", dayHomework: "dayHomeworkSection", settings: "settingsSection", notifications: "notificationsSection", devices: "devicesSection",about: "aboutSection",пше appearance: "appearanceSection",};
+    const sections = {
+    homework: "homeworkSection",
+    calendar: "calendarSection",
+    grades: "gradesSection",
+    profile: "profileSection",
+    dayHomework: "dayHomeworkSection",
+    settings: "settingsSection",
+    appearance: "appearanceSection",
+    notifications: "notificationsSection",
+    devices: "devicesSection",
+    about: "aboutSection"
+};
 
     Object.entries(sections).forEach(([sectionName, id]) => {
         const element = document.getElementById(id);
