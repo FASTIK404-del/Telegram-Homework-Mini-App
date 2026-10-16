@@ -1,64 +1,71 @@
-const pageNames = ["home", "homework", "calendar", "grades", "profile"];
+const pageNames = ["home", "homework", "calendar", "grades", "profile", "dayHomework"];
+
 
 function showSection(name) {
+    if (!pageNames.includes(name)) return;
 
-    const dayHomeworkSection = document.getElementById("dayHomeworkSection");
+    // Главная страница и её элементы
+    document.querySelectorAll(
+        ".header, .welcome, .feature-cards, .home-week-section"
+    ).forEach(element => {
+        element.hidden = name !== "home";
+    });
 
-    if (dayHomeworkSection) {
-        dayHomeworkSection.hidden = name !== "dayHomework";
+    // Остальные экраны
+    const sections = {
+        homework: "homeworkSection",
+        calendar: "calendarSection",
+        grades: "gradesSection",
+        profile: "profileSection",
+        dayHomework: "dayHomeworkSection"
+    };
+
+    Object.entries(sections).forEach(([sectionName, id]) => {
+        const element = document.getElementById(id);
+
+        if (element) {
+            element.hidden = name !== sectionName;
+        }
+    });
+
+    // Обновляем содержимое открытого экрана
+    if (name === "home" && typeof renderHomeWeek === "function") {
+        renderHomeWeek();
+    }
+
+    if (name === "homework") {
+        renderHomework();
+    }
+
+    if (name === "calendar" && typeof renderCalendar === "function") {
+        renderCalendar();
+    }
+
+    if (name === "grades") {
+        renderGrades();
     }
 
     if (name === "dayHomework") {
         renderDayHomework();
     }
 
+    // Подсветка нижнего меню
+    document.querySelectorAll(".nav-item").forEach(button => {
+        const action = button.getAttribute("onclick") || "";
+        const match = action.match(/showSection\('([^']+)'\)/);
 
-    const profileSection = document.getElementById("profileSection");
-    if (profileSection) {
-        profileSection.hidden = name !== "profile";
-    }
-
-    if (!pageNames.includes(name)) return;
-
-    document.querySelectorAll(
-        ".header, .welcome, .feature-cards"
-    ).forEach(element => {
-        element.hidden = name !== "home";
+        button.classList.toggle(
+            "active",
+            match !== null && match[1] === name
+        );
     });
 
-    const homeworkSection = document.getElementById("homeworkSection");
-
-    if (homeworkSection) {
-        homeworkSection.hidden = name !== "homework";
+    // Сбрасываем подсветку дня при выходе из его экрана
+    if (name !== "dayHomework") {
+        document.querySelectorAll("#homeWeekDays .calendar-day")
+            .forEach(button => button.classList.remove("active"));
     }
 
-    const gradesSection = document.getElementById("gradesSection");
-
-    if (gradesSection) {
-        gradesSection.hidden = name !== "grades";
-    }
-    const calendarSection = document.getElementById("calendarSection");
-
-if (calendarSection) {
-    calendarSection.hidden = name !== "calendar";
-    if (name === "calendar") {
-        renderCalendar();
-    }
-
-const profileSection = document.getElementById("profileSection");
-if (profileSection) {
-    profileSection.hidden = name !== "profile";
-}
-
-}
-    document.querySelectorAll(".nav-item").forEach((button, index) => {
-        button.classList.toggle("active", pageNames[index] === name);
-    });
-// При выходе из окна заданий убираем подсветку дней
-if (name !== "dayHomework") {
-    document.querySelectorAll("#homeWeekDays .calendar-day")
-        .forEach(button => button.classList.remove("active"));
-}
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -119,16 +126,32 @@ function createHomeworkCard(task) {
     removeButton.textContent = "Удалить";
 
 
-    removeButton.addEventListener("click", () => {
-        const tasks = getHomeworkTasks().filter(item => item.id !== task.id);
-        saveHomeworkTasks(tasks);
-        renderHomework();
 
-        const calendarSection = document.getElementById("calendarSection");
-        if (calendarSection && !calendarSection.hidden) {
+removeButton.addEventListener("click", () => {
+    const confirmed = confirm(
+        `Точно удалить задание по предмету «${task.subject}»?`
+    );
+
+    if (!confirmed) return;
+
+    const tasks = getHomeworkTasks().filter(
+        item => item.id !== task.id
+    );
+
+    saveHomeworkTasks(tasks);
+    renderHomework();
+
+    if (typeof renderDayHomework === "function") {
+        renderDayHomework();
+    }
+
+    const calendarSection = document.getElementById("calendarSection");
+
+    if (calendarSection && !calendarSection.hidden) {
         renderCalendar();
-        }
-    });
+    }
+});
+
 
 
     card.append(subject, description, day, removeButton);
@@ -172,6 +195,39 @@ function renderHomework() {
             allContainer.appendChild(createHomeworkCard(task));
         });
     }
+}
+
+function renderDayHomework() {
+    const list = document.getElementById("dayHomeworkList");
+    const title = document.getElementById("dayHomeworkTitle");
+
+    if (!list || !title) return;
+
+    const dayNames = [
+        "воскресенье",
+        "понедельник",
+        "вторник",
+        "среду",
+        "четверг",
+        "пятницу",
+        "субботу"
+    ];
+
+    title.textContent = `Задания на ${dayNames[selectedCalendarDay]}`;
+    list.replaceChildren();
+
+    const tasks = getHomeworkTasks().filter(
+        task => Number(task.day) === Number(selectedCalendarDay)
+    );
+
+    if (tasks.length === 0) {
+        list.textContent = "На этот день заданий пока нет.";
+        return;
+    }
+
+    tasks.forEach(task => {
+        list.appendChild(createHomeworkCard(task));
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
