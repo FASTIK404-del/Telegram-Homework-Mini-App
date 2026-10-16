@@ -26,9 +26,25 @@
 
 
         <main>
+
             <section class="welcome">
                 <h1 class="hero-title">Всё в ажуре</h1>
             </section>
+
+            <section class="home-week-section">
+                <div class="week-heading">
+                    <h2>Моя неделя</h2>
+                    <p id="currentWeekLabel">Расписание на эту неделю</p>
+                </div>
+
+                <div id="homeWeekDays" class="calendar-week"></div>
+
+                <div class="home-day-homework">
+                    <h3 id="calendarDayTitle">Выбери день недели</h3>
+                    <p>Нажми на день, чтобы посмотреть домашние задания.</p>
+                </div>
+            </section>
+
 
 <div class="feature-cards">
 
@@ -227,45 +243,7 @@
     </div>
 </section>
 
-<section id="calendarSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
 
-    <div class="section-heading">
-        <h1>Календарь</h1>
-        <p>Твои домашние задания по дням недели</p>
-    </div>
-
-    <div class="calendar-week">
-        <button type="button" class="calendar-day" data-day="1">
-            <span>ПН</span><strong>Пн</strong>
-        </button>
-        <button type="button" class="calendar-day" data-day="2">
-            <span>ВТ</span><strong>Вт</strong>
-        </button>
-        <button type="button" class="calendar-day" data-day="3">
-            <span>СР</span><strong>Ср</strong>
-        </button>
-        <button type="button" class="calendar-day" data-day="4">
-            <span>ЧТ</span><strong>Чт</strong>
-        </button>
-        <button type="button" class="calendar-day" data-day="5">
-            <span>ПТ</span><strong>Пт</strong>
-        </button>
-        <button type="button" class="calendar-day" data-day="6">
-            <span>СБ</span><strong>Сб</strong>
-        </button>
-        <button type="button" class="calendar-day" data-day="0">
-            <span>ВС</span><strong>Вс</strong>
-        </button>
-    </div>
-
-    <div class="homework-group">
-        <h2 id="calendarDayTitle">Задания на понедельник</h2>
-        <div id="calendarHomeworkList" class="homework-list"></div>
-    </div>
-</section>
 
 
 <section id="profileSection" class="content-section" hidden>
@@ -304,6 +282,19 @@
             </button>
         </form>
     </div>
+</section>
+
+<section id="dayHomeworkSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('home')">
+        ← На главную
+    </button>
+
+    <div class="section-heading">
+        <h1 id="dayHomeworkTitle">Домашние задания</h1>
+        <p>Задания на выбранный день</p>
+    </div>
+
+    <div id="dayHomeworkList" class="homework-list"></div>
 </section>
 
         </main>

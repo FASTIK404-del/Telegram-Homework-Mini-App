@@ -2,6 +2,17 @@ const pageNames = ["home", "homework", "calendar", "grades", "profile"];
 
 function showSection(name) {
 
+    const dayHomeworkSection = document.getElementById("dayHomeworkSection");
+
+    if (dayHomeworkSection) {
+        dayHomeworkSection.hidden = name !== "dayHomework";
+    }
+
+    if (name === "dayHomework") {
+        renderDayHomework();
+    }
+
+
     const profileSection = document.getElementById("profileSection");
     if (profileSection) {
         profileSection.hidden = name !== "profile";
@@ -190,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showSection("home");
     renderHomework();
+    renderHomeWeek()
 });
 
 const GRADES_STORAGE_KEY = "homeworkMiniAppGrades";
@@ -306,6 +318,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderGrades();
 });
+
+function renderHomeWeek() {
+    const container = document.getElementById("homeWeekDays");
+    const weekLabel = document.getElementById("currentWeekLabel");
+
+    if (!container) return;
+
+    const today = new Date();
+    const monday = new Date(today);
+    const day = monday.getDay();
+
+    monday.setDate(monday.getDate() - (day === 0 ? 6 : day - 1));
+
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+
+    const months = [
+        "января", "февраля", "марта", "апреля",
+        "мая", "июня", "июля", "августа",
+        "сентября", "октября", "ноября", "декабря"
+    ];
+
+    if (weekLabel) {
+        weekLabel.textContent =
+            `${monday.getDate()} ${months[monday.getMonth()]} — ` +
+            `${sunday.getDate()} ${months[sunday.getMonth()]}`;
+    }
+
+    const names = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+    container.replaceChildren();
+
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(monday);
+        date.setDate(monday.getDate() + i);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "calendar-day";
+
+        const isToday = date.toDateString() === today.toDateString();
+        button.classList.toggle("active", isToday);
+        button.classList.toggle("today", isToday);
+
+        const name = document.createElement("span");
+        name.textContent = names[i];
+
+        const number = document.createElement("strong");
+        number.textContent = date.getDate();
+
+        button.append(name, number);
+
+        button.addEventListener("click", () => {
+            selectedHomeDate = new Date(date);
+            selectedCalendarDay = date.getDay();
+            showSection("dayHomework");
+        });
+
+        container.appendChild(button);
+    }
+}
 
 const calendarWeekdays = [
     "Воскресенье",
