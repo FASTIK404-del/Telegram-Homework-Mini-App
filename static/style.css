@@ -1665,3 +1665,22 @@ iframe {
         letter-spacing: -0.7px;
     }
 }
+/* Уменьшаем высоту карточек на главной */
+.homework-card {
+    min-height: 135px !important;
+}
+
+.small-feature-card {
+    min-height: 110px !important;
+}
+
+/* Чуть меньше внутренних отступов по вертикали */
+.homework-card > .feature-text {
+    padding-top: 14px;
+    padding-bottom: 32px;
+}
+
+.small-feature-card > .feature-text {
+    padding-top: 10px;
+    padding-bottom: 28px;
+}
