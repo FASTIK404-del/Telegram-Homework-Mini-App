@@ -327,13 +327,21 @@ function renderGrades() {
             gradeButton.textContent = item.value;
             gradeButton.title = "Нажми, чтобы удалить оценку";
 
-            gradeButton.addEventListener("click", () => {
-                const updated = getGrades().filter(
-                    grade => grade.id !== item.id
-                );
-                saveGrades(updated);
-                renderGrades();
-            });
+gradeButton.addEventListener("click", () => {
+    const confirmed = confirm(
+        `Точно удалить оценку «${item.value}» по предмету «${item.subject}»?`
+    );
+
+    if (!confirmed) return;
+
+    const updated = getGrades().filter(
+        grade => grade.id !== item.id
+    );
+
+    saveGrades(updated);
+    renderGrades();
+});
+
 
             gradesCell.appendChild(gradeButton);
         });

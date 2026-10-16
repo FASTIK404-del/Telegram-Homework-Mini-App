@@ -1713,3 +1713,259 @@ iframe {
     color: #52eadb;
     box-shadow: 0 0 14px rgba(0, 255, 225, 0.12);
 }
+
+/* Нижнее меню — оформление по референсу */
+.bottom-nav {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+
+    width: min(calc(100% - 24px), 770px);
+    padding: 12px 13px 13px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    border: none;
+    border-radius: 18px;
+    background: #07100f;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.nav-pill {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+
+    min-height: 58px;
+    padding: 4px;
+
+    border: 1px solid #16443e;
+    border-radius: 999px;
+    background: #0b211d;
+    overflow: hidden;
+}
+
+.nav-item {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 48px;
+    min-height: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: #a5c2bb;
+
+    transition:
+        background-color 0.22s ease,
+        color 0.22s ease;
+}
+
+.nav-item svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-item.active {
+    background: #10cbbb;
+    color: #031a17;
+}
+
+.nav-item:focus-visible {
+    outline: 2px solid #b0fff5;
+    outline-offset: -3px;
+}
+
+.nav-labels {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    text-align: center;
+
+    color: #a4bdb7;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.nav-labels span {
+    white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+    .bottom-nav {
+        bottom: 8px;
+        width: calc(100% - 16px);
+        padding: 10px 9px 11px;
+        gap: 9px;
+    }
+
+    .nav-pill {
+        min-height: 54px;
+    }
+
+    .nav-item {
+        height: 44px;
+    }
+
+    .nav-labels {
+        font-size: 10px;
+    }
+}
+
+/* Финальная корректировка нижнего меню */
+.bottom-nav {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 12px 13px 13px !important;
+    gap: 10px !important;
+}
+
+.nav-pill {
+    width: 100%;
+    min-width: 0;
+}
+
+.nav-item {
+    min-width: 0;
+    margin: 0;
+}
+
+.nav-labels {
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+}
+
+.nav-labels span {
+    display: block;
+    min-width: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+@media (max-width: 420px) {
+    .bottom-nav {
+        padding: 10px 9px 11px !important;
+    }
+
+    .nav-labels span {
+        font-size: 10px;
+    }
+}
+
+/* Компактная нижняя панель без подписей */
+.bottom-nav {
+    width: min(360px, calc(100% - 32px)) !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    bottom: 12px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.nav-labels {
+    display: none !important;
+}
+
+.nav-pill {
+    width: 100%;
+    min-height: 54px;
+    padding: 4px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-radius: 999px;
+    background: #0b211d;
+    border: 1px solid #16443e;
+}
+
+.nav-item {
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 999px;
+}
+
+.nav-item svg {
+    width: 19px;
+    height: 19px;
+}
+
+@media (max-width: 420px) {
+    .bottom-nav {
+        width: min(320px, calc(100% - 40px)) !important;
+        bottom: 12px;
+    }
+
+    .nav-pill {
+        min-height: 50px;
+    }
+
+    .nav-item {
+        height: 40px;
+        min-height: 40px;
+    }
+}
+
+.bottom-nav {
+    width: min(100% - 30px, 560px) !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    bottom: 12px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.nav-labels {
+    display: none !important;
+}
+
+.nav-pill {
+    width: 100%;
+    min-height: 58px;
+    padding: 4px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-radius: 999px;
+    background: #0b211d;
+    border: 1px solid #16443e;
+}
+
+.nav-item {
+    height: 48px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 999px;
+}
+
+.nav-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 420px) {
+    .bottom-nav {
+        width: calc(100% - 28px) !important;
+    }
+}

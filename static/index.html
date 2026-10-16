@@ -299,28 +299,65 @@
 
         </main>
 
-        <nav class="bottom-nav">
-            <button class="nav-item active"
-                    onclick="showSection('home')">
-                <span>⌂</span>
-                <small>Главная</small>
-            </button>
-            <button class="nav-item"
-                    onclick="showSection('homework')">
-                <span>▤</span>
-                <small>Задания</small>
-            </button>
-            <button class="nav-item"
-                    onclick="showSection('calendar')">
-                <span>▦</span>
-                <small>Календарь</small>
-            </button>
-            <button class="nav-item"
-                    onclick="showSection('grades')">
-                <span>✳</span>
-                <small>Оценки</small>
-            </button>
-        </nav>
+
+<nav class="bottom-nav">
+    <div class="nav-pill">
+        <button class="nav-item active"
+                type="button"
+                aria-label="Главная"
+                onclick="showSection('home')">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 10.5 12 3l9 7.5"></path>
+                <path d="M5.5 9.5V20h13V9.5"></path>
+                <path d="M9.5 20v-6h5v6"></path>
+            </svg>
+        </button>
+
+        <button class="nav-item"
+                type="button"
+                aria-label="Задания"
+                onclick="showSection('homework')">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="5" width="12" height="16" rx="2"></rect>
+                <path d="M9 5V3h6v2M9 10h6M9 14h6M9 18h4"></path>
+            </svg>
+        </button>
+
+        <button class="nav-item"
+                type="button"
+                aria-label="Оценки"
+                onclick="showSection('grades')">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="3" width="16" height="18" rx="3"></rect>
+                <path d="M8 3v18"></path>
+                <text x="13.5" y="15.5"
+                      text-anchor="middle"
+                      font-size="10"
+                      font-weight="600"
+                      fill="currentColor"
+                      stroke="none">5</text>
+            </svg>
+        </button>
+
+        <button class="nav-item"
+                type="button"
+                aria-label="Настройки"
+                onclick="showSection('profile')">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"></path>
+                <path d="m19.4 13.5 1.1.9-1.5 2.6-1.4-.5a7.8 7.8 0 0 1-1.7 1l-.2 1.5h-3l-.4-1.5a7.8 7.8 0 0 1-1.7-1l-1.4.5-1.5-2.6 1.1-.9a7.2 7.2 0 0 1 0-2l-1.1-.9 1.5-2.6 1.4.5a7.8 7.8 0 0 1 1.7-1l.4-1.5h3l.2 1.5a7.8 7.8 0 0 1 1.7 1l1.4-.5 1.5 2.6-1.1.9a7.2 7.2 0 0 1 0 2Z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="nav-labels">
+        <span>Главная</span>
+        <span>Задания</span>
+        <span>Оценки</span>
+        <span>Настройки</span>
+    </div>
+</nav>
+
     </div>
 
     <script src="app.js"></script>
