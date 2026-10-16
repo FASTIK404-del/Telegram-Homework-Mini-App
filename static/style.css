@@ -1598,6 +1598,29 @@ iframe {
     padding-left: 8px;
 }
 
+/* Исправляем заголовки нижних карточек */
+.small-feature-card .feature-text h2 {
+    font-size: 15px !important;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+/* Значок уводим в правый верхний угол */
+.small-feature-card .feature-arrow {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+}
+
+/* Оставляем тексту отдельное место */
+.small-feature-card .feature-text {
+    padding-right: 48px !important;
+    box-sizing: border-box;
+}
+
 
 
 
