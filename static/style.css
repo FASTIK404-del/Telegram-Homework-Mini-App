@@ -2397,3 +2397,212 @@ iframe {
         transform: scale(0.98);
     }
 }
+
+.about-card {
+    text-align: center;
+    padding: 28px 18px;
+}
+
+.about-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 14px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #10cbbb, #087b70);
+    color: #06201d;
+    font-size: 32px;
+    font-weight: 800;
+    box-shadow: 0 8px 28px rgba(16, 203, 187, 0.18);
+}
+
+.about-card h2 {
+    margin: 0 0 8px;
+}
+
+.about-card p {
+    color: #9bb5b0;
+    margin: 0 0 14px;
+}
+
+.about-version {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(16, 203, 187, 0.12);
+    color: #10cbbb;
+    font-size: 12px;
+}
+
+.about-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    color: #eaf5f2;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.about-info-row:last-child {
+    border-bottom: none;
+}
+
+.about-info-row span:last-child {
+    color: #10cbbb;
+}
+
+/* Выбор темы */
+.theme-settings-card h2 {
+    margin-top: 0;
+}
+
+.theme-choice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid rgba(150, 180, 170, 0.18);
+    border-radius: 16px;
+    background: rgba(130, 160, 150, 0.05);
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.theme-choice:hover {
+    border-color: #10cbbb;
+    background: rgba(16, 203, 187, 0.08);
+}
+
+.theme-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+    flex: 0 0 48px;
+    height: 48px;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.dark-preview {
+    background: #101817;
+}
+
+.light-preview {
+    background: #f7faf9;
+    border: 1px solid #dce7e3;
+}
+
+.theme-preview span {
+    display: block;
+    height: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background: #10cbbb;
+}
+
+.theme-preview span:nth-child(2) {
+    width: 75%;
+}
+
+.theme-preview span:nth-child(3) {
+    width: 50%;
+}
+
+.theme-choice-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.theme-choice-text strong {
+    font-size: 14px;
+}
+
+.theme-choice-text small {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.theme-check {
+    color: #10cbbb;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Светлая тема всего приложения */
+html[data-theme="light"] body {
+    background: #f3f7f6 !important;
+    color: #1b2926 !important;
+}
+
+html[data-theme="light"] .app {
+    background: #f3f7f6 !important;
+    color: #1b2926 !important;
+}
+
+html[data-theme="light"] .content-section,
+html[data-theme="light"] .header,
+html[data-theme="light"] .welcome,
+html[data-theme="light"] .home-week-section,
+html[data-theme="light"] .feature-cards {
+    color: #1b2926;
+}
+
+html[data-theme="light"] .settings-card,
+html[data-theme="light"] .profile-card,
+html[data-theme="light"] .homework-card-item,
+html[data-theme="light"] .feature-card,
+html[data-theme="light"] .calendar-day,
+html[data-theme="light"] .settings-menu {
+    background: #ffffff !important;
+    color: #1b2926 !important;
+    border-color: #dce7e3 !important;
+    box-shadow: 0 5px 20px rgba(25, 65, 55, 0.05);
+}
+
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] .settings-option strong,
+html[data-theme="light"] .settings-menu-title,
+html[data-theme="light"] .about-info-row {
+    color: #1b2926 !important;
+}
+
+html[data-theme="light"] p,
+html[data-theme="light"] small,
+html[data-theme="light"] .settings-description,
+html[data-theme="light"] .settings-option small {
+    color: #647771;
+}
+
+html[data-theme="light"] .bottom-nav {
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-color: #dce7e3 !important;
+}
+
+html[data-theme="light"] input:not([type="checkbox"]),
+html[data-theme="light"] textarea,
+html[data-theme="light"] select {
+    background: #ffffff !important;
+    color: #1b2926 !important;
+    border-color: #d0ded9 !important;
+}
+
+html[data-theme="light"] .settings-menu-icon {
+    background: #e0f7f3;
+    color: #078f83;
+}
+
+html[data-theme="light"] .theme-choice {
+    color: #1b2926;
+    border-color: #dce7e3;
+}

@@ -1,4 +1,4 @@
-const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance'];
+const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about'];
 
 
 function showSection(name) {
@@ -12,7 +12,7 @@ function showSection(name) {
     });
 
     // Остальные экраны
-    const sections = {homework: "homeworkSection", calendar: "calendarSection", grades: "gradesSection", profile: "profileSection", dayHomework: "dayHomeworkSection", settings: "settingsSection", notifications: "notificationsSection", devices: "devicesSection",};
+    const sections = {homework: "homeworkSection", calendar: "calendarSection", grades: "gradesSection", profile: "profileSection", dayHomework: "dayHomeworkSection", settings: "settingsSection", notifications: "notificationsSection", devices: "devicesSection",about: "aboutSection",пше appearance: "appearanceSection",};
 
     Object.entries(sections).forEach(([sectionName, id]) => {
         const element = document.getElementById(id);
@@ -845,6 +845,42 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", updateHomeProfile);
+
+function applyAppTheme(theme) {
+    const selectedTheme = theme === "light" ? "light" : "dark";
+
+    document.documentElement.dataset.theme = selectedTheme;
+
+    try {
+        localStorage.setItem("homeworkMiniAppTheme", selectedTheme);
+    } catch (error) {
+        console.warn("Не удалось сохранить тему", error);
+    }
+
+    document.querySelectorAll("[data-theme-choice]").forEach(button => {
+        const active = button.dataset.themeChoice === selectedTheme;
+        button.classList.toggle("selected", active);
+
+        const check = button.querySelector(".theme-check");
+        if (check) check.textContent = active ? "✓" : "";
+    });
+}
+
+document.querySelectorAll("[data-theme-choice]").forEach(button => {
+    button.addEventListener("click", () => {
+        applyAppTheme(button.dataset.themeChoice);
+    });
+});
+
+let savedAppTheme = "dark";
+
+try {
+    savedAppTheme = localStorage.getItem("homeworkMiniAppTheme") || "dark";
+} catch (error) {
+    console.warn("Не удалось прочитать тему", error);
+}
+
+applyAppTheme(savedAppTheme);
 
 
 
