@@ -1511,5 +1511,41 @@ iframe {
     line-height: 1.45;
 }
 
+/* Увеличиваем нижние карточки и освобождаем место для текста */
+.small-cards {
+    gap: 10px;
+}
+
+.small-feature-card {
+    min-height: 150px;
+    min-width: 0;
+}
+
+.small-feature-card .feature-text {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    padding-right: 48px;
+}
+
+.small-feature-card .feature-text h2 {
+    font-size: 17px;
+    line-height: 1.35;
+    white-space: normal;
+}
+
+.small-feature-card .feature-text p {
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+/* Значок остаётся справа и не перекрывает текст */
+.small-feature-card .feature-arrow {
+    position: absolute
+    top: 14px;
+    right: 14px;
+}
+
+
 
 
