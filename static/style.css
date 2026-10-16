@@ -1,5 +1,4 @@
-css
-* {
+ {
     box-sizing: border-box;
 }
 
@@ -1969,3 +1968,83 @@ iframe {
         width: calc(100% - 28px) !important;
     }
 }
+
+/* Исправляем положение иконок в нижнем меню */
+.nav-pill {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden;
+}
+
+.nav-pill .nav-item {
+    display: flex !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+.nav-pill .nav-item svg {
+    display: block;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* Фикс последней иконки в нижнем меню */
+.bottom-nav .nav-pill {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 4px !important;
+    overflow: hidden !important;
+}
+
+.bottom-nav .nav-pill .nav-item {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 48px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+}
+
+.bottom-nav .nav-pill .nav-item svg {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 auto !important;
+    flex-shrink: 0 !important;
+}
+
+@media (max-width: 420px) {
+    .bottom-nav .nav-pill .nav-item {
+        height: 46px !important;
+    }
+}
+.bottom-nav .nav-pill .nav-item:last-child .settings-icon {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    flex: 0 0 20px !important;
+    margin: 0 !important;
+    transform: translateX(-3px) !important;
+}
+.bottom-nav .nav-pill .nav-item:last-child svg {
+    width: 23px !important;
+    height: 23px !important;
+}
+
+
