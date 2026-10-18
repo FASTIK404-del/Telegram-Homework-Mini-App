@@ -1,4 +1,4 @@
-const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about','support'];
+const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about','support','files'];
 
 
 function showSection(name) {
@@ -31,7 +31,8 @@ function showSection(name) {
     appearance: "appearanceSection",
     notifications: "notificationsSection",
     devices: "devicesSection",
-    about: "aboutSection"
+    about: "aboutSection",
+    files: "filesSection",
 };
 
     Object.entries(sections).forEach(([sectionName, id]) => {
@@ -966,6 +967,68 @@ if (supportForm) {
         }
     });
 }
+
+
+function addStudyFiles() {
+    const input = document.getElementById("studyFilesInput");
+    const list = document.getElementById("studyFilesList");
+    const subjectInput = document.getElementById("studySubjectInput");
+
+    if (!input || !list || !subjectInput) return;
+
+    const files = Array.from(input.files);
+    const subject = subjectInput.value.trim();
+
+    if (!subject) {
+        alert("Сначала укажи предмет.");
+        subjectInput.focus();
+        return;
+    }
+
+    if (files.length === 0) {
+        alert("Сначала выбери файлы.");
+        return;
+    }
+
+    if (list.textContent.trim() === "Пока файлов нет.") {
+        list.textContent = "";
+    }
+
+    files.forEach(file => {
+        const item = document.createElement("div");
+        item.className = "homework-card-item";
+
+        const subjectLabel = document.createElement("small");
+        subjectLabel.textContent = "📚 " + subject;
+
+        const name = document.createElement("p");
+        name.textContent = file.name;
+
+        const size = document.createElement("small");
+        size.textContent = `${(file.size / 1024).toFixed(1)} КБ`;
+
+        const download = document.createElement("button");
+        download.type = "button";
+        download.className = "support-submit-button";
+        download.textContent = "Скачать";
+
+        const url = URL.createObjectURL(file);
+
+        download.addEventListener("click", () => {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = file.name;
+            link.click();
+        });
+
+        item.append(subjectLabel, name, size, download);
+        list.appendChild(item);
+    });
+
+    input.value = "";
+    subjectInput.value = "";
+}
+
 
 
 

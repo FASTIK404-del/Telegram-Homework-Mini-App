@@ -75,7 +75,7 @@
 
 
 <button class="feature-card small-feature-card files-card"
-        onclick="showSection('calendar')">
+        onclick="showSection('files')">
 
     <span class="feature-icon-box">
         <svg viewBox="0 0 24 24" fill="none"
@@ -628,7 +628,77 @@
     </div>
 </section>
 
+<section id="filesSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('home')">
+        ← На главную
+    </button>
 
+    <div class="section-heading">
+        <h1>Мои файлы</h1>
+        <p>Твои учебные материалы в одном месте</p>
+    </div>
+
+    <div class="settings-card">
+        <h2>Добавить учебный файл</h2>
+        <p>Выбери документ или фотографию с устройства.</p>
+
+
+<label for="studySubjectInput" class="study-field-label">
+    Предмет
+</label>
+
+<input
+    id="studySubjectInput"
+    class="study-subject-input"
+    type="text"
+    maxlength="60"
+    placeholder="Например, Информатика"
+>
+
+<label for="studyFilesInput" class="study-field-label">
+    Файлы
+</label>
+
+<label for="studyFilesInput" class="study-file-picker">
+    <span class="study-file-picker-icon">↑</span>
+    <span class="study-file-picker-text">
+        <strong>Выбрать файлы</strong>
+        <small>PDF, Word, Excel, изображения</small>
+    </span>
+    <span class="study-file-picker-arrow">→</span>
+</label>
+
+<input
+    id="studyFilesInput"
+    class="study-files-input"
+    type="file"
+    multiple
+    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png"
+>
+
+<button
+    type="button"
+    class="support-submit-button"
+    onclick="addStudyFiles()"
+>
+    Сохранить
+</button>
+
+
+        <button
+            type="button"
+            class="support-submit-button"
+            onclick="addStudyFiles()"
+        >
+            Добавить файлы
+        </button>
+    </div>
+
+    <div class="settings-card">
+        <h2>Загруженные файлы</h2>
+        <div id="studyFilesList">Пока файлов нет.</div>
+    </div>
+</section>
         </main>
 
 

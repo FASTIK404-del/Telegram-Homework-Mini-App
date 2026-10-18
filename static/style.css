@@ -3245,5 +3245,101 @@ body:has(.homework-form input:focus,
     overflow-wrap: anywhere;
 }
 
+.study-field-label {
+    display: block;
+    margin: 18px 0 9px;
+    color: #a7c7c8;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.study-subject-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 14px 15px;
+    border: 1px solid rgba(0, 220, 200, 0.25);
+    border-radius: 13px;
+    background: #0b1716;
+    color: #f4ffff;
+    font: inherit;
+    outline: none;
+}
+
+.study-subject-input:focus {
+    border-color: #00dcca;
+    box-shadow: 0 0 0 3px rgba(0, 220, 200, 0.1);
+}
+
+.study-subject-input::placeholder {
+    color: #789493;
+}
+
+.study-files-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.study-file-picker {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+    border: 1px dashed rgba(0, 220, 200, 0.45);
+    border-radius: 15px;
+    background: rgba(0, 220, 200, 0.055);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.study-file-picker:hover {
+    background: rgba(0, 220, 200, 0.11);
+    border-color: #00dcca;
+}
+
+.study-file-picker-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(0, 220, 200, 0.13);
+    color: #00e5d0;
+    font-size: 26px;
+}
+
+.study-file-picker-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.study-file-picker-text strong {
+    color: #eafffd;
+    font-size: 14px;
+}
+
+.study-file-picker-text small {
+    color: #8eacab;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.study-file-picker-arrow {
+    color: #00e5d0;
+    font-size: 21px;
+}
+
 
 
