@@ -2979,3 +2979,45 @@ body:has(.homework-form input:focus,
 }
 
 
+@media (max-width: 600px) {
+    .feature-card {
+        padding: 20px 16px !important;
+        gap: 12px !important;
+    }
+
+    .feature-icon-box {
+        flex: 0 0 48px !important;
+        width: 48px !important;
+        height: 48px !important;
+        margin-left: 0 !important;
+    }
+
+    .feature-icon-box svg {
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    .feature-text {
+        flex: 1;
+        min-width: 0;
+        width: auto !important;
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .small-feature-card .feature-text h2 {
+        font-size: 16px !important;
+        line-height: 1.25;
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .small-feature-card .feature-text p {
+        font-size: 11px !important;
+        line-height: 1.35;
+    }
+}
+
+
+
