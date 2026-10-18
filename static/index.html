@@ -537,6 +537,7 @@
 </section>
 
 
+
 <section id="supportSection" class="content-section" hidden>
     <button class="back-button" onclick="showSection('home')">
         ← На главную
@@ -547,15 +548,60 @@
         <p>Поможем сделать FLOWLY лучше</p>
     </div>
 
-    <div class="settings-card">
-        <div class="support-icon">✉</div>
-        <h2>Есть проблема?</h2>
-        <p>Здесь можно будет сообщить об ошибке или предложить улучшение.</p>
-        <p style="color: #8faeaa;">
-            Отправка сообщений появится на следующем этапе.
+    <div class="settings-card support-form-card">
+        <div class="support-form-icon">
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="m3 7 9 7 9-7"/>
+            </svg>
+        </div>
+
+        <h2>Обратная связь</h2>
+        <p class="support-form-description">
+            Нашёл ошибку или есть идея? Напиши нам!
         </p>
+
+        <form id="supportForm">
+            <label for="supportType">Тип обращения</label>
+            <select id="supportType" name="type" required>
+                <option value="Ошибка">Сообщить об ошибке</option>
+                <option value="Предложение">Предложить улучшение</option>
+                <option value="Вопрос">Задать вопрос</option>
+            </select>
+
+            <label for="supportSubject">Тема</label>
+            <input
+                id="supportSubject"
+                name="subject"
+                type="text"
+                maxlength="100"
+                placeholder="Кратко опиши проблему"
+                required
+            >
+
+            <label for="supportMessage">Описание</label>
+            <textarea
+                id="supportMessage"
+                name="message"
+                rows="5"
+                maxlength="2000"
+                placeholder="Расскажи подробнее..."
+                required
+            ></textarea>
+
+            <button class="support-submit-button" type="submit">
+                <span>Отправить обращение</span>
+                <span>→</span>
+            </button>
+
+            <p id="supportFormStatus" class="support-form-status"
+               role="status" aria-live="polite"></p>
+        </form>
     </div>
 </section>
+
 
 
 
