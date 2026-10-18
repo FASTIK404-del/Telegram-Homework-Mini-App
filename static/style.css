@@ -2606,3 +2606,30 @@ html[data-theme="light"] .theme-choice {
     color: #1b2926;
     border-color: #dce7e3;
 }
+
+.welcome .hero-title,
+.hero-title {
+    font-size: clamp(80px, 12vw, 88px) !important;
+    font-weight: 900 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -2px !important;
+
+    background: linear-gradient(
+        90deg,
+        #087f78 0%,
+        #12b9b0 50%,
+        #00fff0 100%
+    ) !important;
+
+    background-size: 100% 100% !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+
+    filter:
+        drop-shadow(0 0 7px rgba(0, 255, 240, 0.45))
+        drop-shadow(0 0 20px rgba(0, 255, 240, 0.30))
+        drop-shadow(0 0 38px rgba(0, 180, 170, 0.20)) !important;
+
+    animation: none !important;
+}
