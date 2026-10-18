@@ -1,7 +1,16 @@
-const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about'];
+const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about','support'];
 
 
 function showSection(name) {
+        const supportHomeCard = document.getElementById("supportHomeCard");
+
+    if (supportHomeCard) {
+        supportHomeCard.hidden = name !== "home";
+    }
+        const supportSection = document.getElementById("supportSection");
+    if (supportSection) {
+    supportSection.hidden = name !== "support";
+    }
     if (!pageNames.includes(name)) return;
 
     // Главная страница и её элементы

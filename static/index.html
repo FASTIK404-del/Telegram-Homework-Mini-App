@@ -47,40 +47,91 @@
 
 <div class="feature-cards">
 
-    <button class="feature-card homework-card"
-            onclick="showSection('homework')">
 
-        <div class="feature-text">
-            <h2>Домашние задания</h2>
-            <p>Всё, что задали по предметам.</p>
-        </div>
-        <span class="feature-arrow">✦</span>
-    </button>
+<button class="feature-card homework-card"
+        onclick="showSection('homework')">
+
+    <span class="feature-icon-box">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/>
+            <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"/>
+            <path d="M8 7h7M8 10h7"/>
+        </svg>
+    </span>
+
+    <div class="feature-text">
+        <h2>Домашние задания</h2>
+        <p>Всё, что задали по предметам.</p>
+    </div>
+
+    <span class="feature-arrow">✦</span>
+</button>
+
 
     <div class="small-cards">
 
-        <button class="feature-card small-feature-card"
-                onclick="showSection('calendar')">
 
-            <div class="feature-text">
-                <h2>Мои файлы</h2>
-                <p>Учебные материалы</p>
-            </div>
-            <span class="feature-arrow">✦</span>
-        </button>
+<button class="feature-card small-feature-card files-card"
+        onclick="showSection('calendar')">
 
-        <button class="feature-card small-feature-card"
-                onclick="showSection('grades')">
+    <span class="feature-icon-box">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/>
+            <path d="M3 9h18"/>
+        </svg>
+    </span>
 
-        <div class="feature-text">
-               <h2>Мои оценки</h2>
-               <p>Средний балл</p>
-        </div>
-        <span class="feature-arrow">✦</span>
-        </button>
+    <div class="feature-text">
+        <h2>Мои файлы</h2>
+        <p>Учебные материалы</p>
+    </div>
+
+    <span class="feature-arrow">✦</span>
+</button>
+
+<button class="feature-card small-feature-card grades-card"
+        onclick="showSection('grades')">
+
+    <span class="feature-icon-box">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="m12 3 9 5-9 5-9-5z"/>
+            <path d="M7 11v5c3 2.5 7 2.5 10 0v-5"/>
+            <path d="M21 8v6"/>
+        </svg>
+    </span>
+
+    <div class="feature-text">
+        <h2>Мои оценки</h2>
+        <p>Средний балл</p>
+    </div>
+
+    <span class="feature-arrow">✦</span>
+</button>
+
 
     </div>
 </div>
+
+<section class="support-home-card" id="supportHomeCard">
+    <button class="support-button" onclick="showSection('support')">
+        <span class="support-icon">✉</span>
+        <span class="support-button-text">
+            <strong>Поддержка</strong>
+            <small>Сообщить об ошибке или предложить улучшение</small>
+        </span>
+        <span class="support-arrow">→</span>
+    </button>
+</section>
+
 
 
 <section id="homeworkSection" class="content-section" hidden>
@@ -486,6 +537,27 @@
 </section>
 
 
+<section id="supportSection" class="content-section" hidden>
+    <button class="back-button" onclick="showSection('home')">
+        ← На главную
+    </button>
+
+    <div class="section-heading">
+        <h1>Поддержка</h1>
+        <p>Поможем сделать FLOWLY лучше</p>
+    </div>
+
+    <div class="settings-card">
+        <div class="support-icon">✉</div>
+        <h2>Есть проблема?</h2>
+        <p>Здесь можно будет сообщить об ошибке или предложить улучшение.</p>
+        <p style="color: #8faeaa;">
+            Отправка сообщений появится на следующем этапе.
+        </p>
+    </div>
+</section>
+
+
 
 <section id="aboutSection" class="content-section" hidden>
     <button class="back-button" onclick="showSection('settings')">
@@ -494,31 +566,22 @@
 
     <div class="section-heading">
         <h1>О приложении</h1>
-        <p>Всё необходимое для учёбы в одном месте</p>
+        <p>Твой учебный дневник нового поколения</p>
     </div>
 
     <div class="settings-card about-card">
-        <div class="about-logo">А</div>
-        <h2>Всё в ажуре</h2>
+        <img
+            src="flowly-logo.png"
+            alt="FLOWLY"
+            class="about-logo-image"
+        >
+
+        <h2>FLOWLY</h2>
         <p>Твой личный учебный дневник</p>
         <span class="about-version">Версия 1.0</span>
     </div>
-
-    <div class="settings-card about-info-card">
-        <div class="about-info-row">
-            <span>Домашние задания</span>
-            <span>✓</span>
-        </div>
-        <div class="about-info-row">
-            <span>Календарь</span>
-            <span>✓</span>
-        </div>
-        <div class="about-info-row">
-            <span>Мои оценки</span>
-            <span>✓</span>
-        </div>
-    </div>
 </section>
+
 
         </main>
 
