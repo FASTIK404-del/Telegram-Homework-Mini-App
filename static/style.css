@@ -2633,3 +2633,10 @@ html[data-theme="light"] .theme-choice {
 
     animation: none !important;
 }
+
+/* FLOWLY: скрываем нижнее меню при вводе домашнего задания */
+body:has(.homework-form input:focus,
+         .homework-form textarea:focus,
+         .homework-form select:focus) .bottom-nav {
+    display: none !important;
+}
