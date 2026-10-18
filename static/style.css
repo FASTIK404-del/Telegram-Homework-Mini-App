@@ -3075,5 +3075,175 @@ body:has(.homework-form input:focus,
     font-weight: 400;
 }
 
+/* Форма поддержки FLOWLY */
+.support-form-card {
+    padding: 24px;
+}
+
+.support-form-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    border-radius: 16px;
+    color: #00eadd;
+    background: #103632;
+}
+
+.support-form-icon svg {
+    width: 27px;
+    height: 27px;
+}
+
+.support-form-card h2 {
+    margin: 0 0 10px;
+}
+
+.support-form-description {
+    color: #91b2b3;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+#supportForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#supportForm label {
+    color: #b8d0ce;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+#supportForm input,
+#supportForm select,
+#supportForm textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 14px;
+    border: 1px solid rgba(40, 220, 200, 0.2);
+    border-radius: 14px;
+    background: #0b1715;
+    color: #f1ffff;
+    font: inherit;
+    outline: none;
+}
+
+#supportForm input:focus,
+#supportForm select:focus,
+#supportForm textarea:focus {
+    border-color: #00cbbb;
+}
+
+#supportForm textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#supportForm input::placeholder,
+#supportForm textarea::placeholder {
+    color: #718e8b;
+}
+
+.support-submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-top: 14px;
+    padding: 17px 20px;
+    border: 1px solid #087f75;
+    border-radius: 16px;
+    background: #103632;
+    color: #00eadd;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.support-submit-button:hover {
+    border-color: #00eadd;
+    box-shadow: 0 0 14px rgba(0, 234, 221, 0.14);
+}
+
+.support-form-status {
+    margin: 4px 0 0;
+    color: #91b2b3;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .support-form-card {
+        padding: 18px;
+    }
+
+    #supportForm input,
+    #supportForm select,
+    #supportForm textarea {
+        font-size: 16px;
+    }
+}
+
+/* FLOWLY: исправление полей формы поддержки */
+#supportForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#supportForm label {
+    display: block;
+    width: 100%;
+    margin: 4px 0 0;
+    color: #b8d2d0;
+    font-size: 14px;
+}
+
+#supportForm input,
+#supportForm select,
+#supportForm textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 14px;
+    border: 1px solid rgba(40, 220, 200, 0.2);
+    border-radius: 14px;
+    background: #0b1715;
+    color: #f1ffff;
+    font: inherit;
+}
+
+#supportForm select {
+    margin: 0;
+    appearance: auto;
+}
+
+#supportForm textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#supportForm .support-submit-button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+}
+
+#supportForm .support-form-status {
+    margin: 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
 
 
