@@ -2640,3 +2640,31 @@ body:has(.homework-form input:focus,
          .homework-form select:focus) .bottom-nav {
     display: none !important;
 }
+
+/* FLOWLY — более чёткий текст на телефонах */
+@media screen and (max-width: 600px) {
+    body {
+        -webkit-font-smoothing: auto;
+        text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3,
+    .hero-title,
+    .welcome h1,
+    .welcome h2 {
+        font-weight: 800 !important;
+    }
+
+    p,
+    label,
+    button,
+    input,
+    select,
+    textarea {
+        font-weight: 500;
+    }
+
+    .hero-title {
+        font-weight: 900 !important;
+    }
+}
