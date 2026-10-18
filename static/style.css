@@ -304,6 +304,18 @@ button {
         transform: translateY(-2px);
     }
 
+/* Подсветка кнопки поддержки при наведении */
+.support-button {
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.support-button:hover {
+    border-color: #10cbbb;
+    box-shadow: 0 0 14px rgba(0, 234, 221, 0.16);
+    transform: translateY(-2px);
+}
+
+
     .feature-card > img {
         position: absolute;
         inset: 0;
@@ -2736,6 +2748,7 @@ body:has(.homework-form input:focus,
     border-radius: 24px;
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
+    position: relative;
 }
 
 .support-button:active {
@@ -3048,6 +3061,18 @@ body:has(.homework-form input:focus,
         color: #00eadd;
         mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='1'/%3E%3Cpath d='m3 7 9 7 9-7'/%3E%3C/svg%3E") center / contain no-repeat;
     }
+}
+
+/* Звёздочка на карточке поддержки */
+
+.support-button .support-arrow {
+    position: absolute;
+    right: 17px;
+    bottom: 18px;
+    color: #00eadd;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 400;
 }
 
 
