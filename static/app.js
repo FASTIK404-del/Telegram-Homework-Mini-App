@@ -902,6 +902,71 @@ try {
 
 applyAppTheme(savedAppTheme);
 
+const supportForm = document.getElementById("supportForm");
+
+if (supportForm) {
+    supportForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = supportForm.querySelector(
+            ".support-submit-button"
+        );
+        const status = document.getElementById("supportFormStatus");
+
+        const type = document.getElementById("supportType").value;
+        const subject = document.getElementById("supportSubject").value.trim();
+        const message = document.getElementById("supportMessage").value.trim();
+
+        const telegram = window.Telegram?.WebApp;
+        const initData = telegram?.initData || "";
+
+        if (!initData) {
+            status.textContent = "Открой FLOWLY через Telegram, чтобы отправить обращение.";
+            return;
+        }
+
+        if (!subject || !message) {
+            status.textContent = "Заполни тему и описание обращения.";
+            return;
+        }
+
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = "<span>Отправляем...</span><span>…</span>";
+        status.textContent = "";
+
+        try {
+            const response = await fetch("/api/support", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    initData,
+                    type,
+                    subject,
+                    message
+                })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.ok) {
+                throw new Error(result.message || "Не удалось отправить обращение.");
+            }
+
+            status.textContent = "✓ Обращение отправлено! Спасибо за обратную связь.";
+            supportForm.reset();
+        } catch (error) {
+            status.textContent = error.message ||
+                "Не удалось отправить обращение. Попробуй ещё раз.";
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+        }
+    });
+}
+
 
 
 
