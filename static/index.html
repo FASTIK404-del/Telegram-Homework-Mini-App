@@ -8,761 +8,799 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app">
-        <header class="header">
-            <div class="logo" id="homeProfileAvatar"
-                onclick="showSection('settings')"
-                title="Открыть профиль"
-                role="button"
-                tabindex="0">
-                HM
+<div class="app">
+
+    <header class="header">
+        <div class="logo" id="homeProfileAvatar"
+             onclick="showSection('settings')"
+             title="Открыть профиль"
+             role="button" tabindex="0">HM</div>
+        <div>
+            <h1 id="userName">Имя Фамилия</h1>
+            <p>Добро пожаловать</p>
+            <p>Твой дневник</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h1 class="hero-title">FLOWLY</h1>
+        </section>
+
+        <section class="home-week-section">
+            <div class="week-heading">
+                <h2>Моя неделя</h2>
+                <p id="currentWeekLabel">Расписание на эту неделю</p>
             </div>
-            <div>
-                <h1 id="userName">Имя Фамилия</h1>
-                <p>Добро пожаловать</p>
-                <p>Твой дневник</p>
+            <div id="homeWeekDays" class="calendar-week"></div>
+            <div class="home-day-homework">
+                <p>Нажми на день, чтобы посмотреть домашние задания.</p>
             </div>
-        </header>
+        </section>
 
+        <div class="feature-cards">
+            <button class="feature-card homework-card"
+                    onclick="showSection('homework')">
+                <span class="feature-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/>
+                        <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"/>
+                        <path d="M8 7h7M8 10h7"/>
+                    </svg>
+                </span>
+                <div class="feature-text">
+                    <h2>Домашние задания</h2>
+                    <p>Всё, что задали по предметам.</p>
+                </div>
+                <span class="feature-arrow">✦</span>
+            </button>
 
-        <main>
+            <div class="small-cards">
+                <button class="feature-card small-feature-card files-card"
+                        onclick="showSection('files')">
+                    <span class="feature-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/>
+                            <path d="M3 9h18"/>
+                        </svg>
+                    </span>
+                    <div class="feature-text">
+                        <h2>Мои файлы</h2>
+                        <p>Учебные материалы</p>
+                    </div>
+                    <span class="feature-arrow">✦</span>
+                </button>
 
-            <section class="welcome">
-                <h1 class="hero-title">FLOWLY</h1>
-            </section>
+                <button class="feature-card small-feature-card grades-card"
+                        onclick="showSection('grades')">
+                    <span class="feature-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="m12 3 9 5-9 5-9-5z"/>
+                            <path d="M7 11v5c3 2.5 7 2.5 10 0v-5"/>
+                            <path d="M21 8v6"/>
+                        </svg>
+                    </span>
+                    <div class="feature-text">
+                        <h2>Мои оценки</h2>
+                        <p>Средний балл</p>
+                    </div>
+                    <span class="feature-arrow">✦</span>
+                </button>
+            </div>
+        </div>
 
-            <section class="home-week-section">
-                <div class="week-heading">
-                    <h2>Моя неделя</h2>
-                    <p id="currentWeekLabel">Расписание на эту неделю</p>
+        <section class="support-home-card" id="supportHomeCard">
+            <button class="support-button" onclick="showSection('support')">
+                <span class="support-icon">✉</span>
+                <span class="support-button-text">
+                    <strong>Поддержка</strong>
+                    <small>Сообщить об ошибке или предложить улучшение</small>
+                </span>
+                <span class="support-arrow">✦</span>
+            </button>
+        </section>
+
+        <section id="homeworkSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
+            <div class="section-heading">
+                <h1>Домашние задания</h1>
+                <p>Все задания по предметам</p>
+            </div>
+
+            <button class="add-homework-button" onclick="toggleHomeworkForm()">
+                <span>＋</span> Добавить ДЗ
+            </button>
+
+            <form id="homeworkForm" class="homework-form" hidden>
+                <h2>Новое задание</h2>
+                <label for="homeworkSubject">Предмет</label>
+                <select id="homeworkSubject" required>
+                    <option value="">Выбери предмет</option>
+                    <option>Математика</option>
+                    <option>Русский язык</option>
+                    <option>Литература</option>
+                    <option>Английский язык</option>
+                    <option>Информатика</option>
+                    <option>История</option>
+                    <option>Обществознание</option>
+                    <option>Физика</option>
+                    <option>Химия</option>
+                    <option>Биология</option>
+                    <option>География</option>
+                    <option>Физкультура</option>
+                    <option>ОБЖ</option>
+                    <option>Другое</option>
+                </select>
+
+                <label for="homeworkDescription">Что задали?</label>
+                <textarea id="homeworkDescription"
+                          placeholder="Напиши задание..."
+                          rows="3" required></textarea>
+
+                <label for="homeworkDay">День недели</label>
+                <select id="homeworkDay" required>
+                    <option value="">Выбери день</option>
+                    <option value="1">Понедельник</option>
+                    <option value="2">Вторник</option>
+                    <option value="3">Среда</option>
+                    <option value="4">Четверг</option>
+                    <option value="5">Пятница</option>
+                    <option value="6">Суббота</option>
+                    <option value="0">Воскресенье</option>
+                </select>
+
+                <div class="homework-form-actions">
+                    <button type="submit" class="save-homework-button">
+                        Сохранить
+                    </button>
+                    <button type="button" class="cancel-homework-button"
+                            onclick="toggleHomeworkForm()">
+                        Отмена
+                    </button>
+                </div>
+            </form>
+
+            <div class="homework-group">
+                <h2>На завтра</h2>
+                <div id="tomorrowHomework" class="homework-list"></div>
+            </div>
+            <div class="homework-group">
+                <h2>Все задания</h2>
+                <div id="allHomework" class="homework-list"></div>
+            </div>
+        </section>
+
+        <section id="gradesSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
+            <div class="section-heading">
+                <h1>Мои оценки</h1>
+                <p>Оценки по предметам и средний балл</p>
+            </div>
+
+            <button class="add-homework-button" onclick="toggleGradeForm()">
+                ＋ Добавить оценку
+            </button>
+
+            <form id="gradeForm" class="homework-form" hidden>
+                <h2>Новая оценка</h2>
+                <label for="gradeSubject">Предмет</label>
+                <select id="gradeSubject" required>
+                    <option value="">Выбери предмет</option>
+                    <option>Математика</option>
+                    <option>Русский язык</option>
+                    <option>Литература</option>
+                    <option>Английский язык</option>
+                    <option>Информатика</option>
+                    <option>История</option>
+                    <option>Обществознание</option>
+                    <option>Физика</option>
+                    <option>Химия</option>
+                    <option>Биология</option>
+                    <option>География</option>
+                    <option>Физкультура</option>
+                    <option>ОБЖ</option>
+                    <option>Другое</option>
+                </select>
+
+                <label for="gradeValue">Оценка</label>
+                <select id="gradeValue" required>
+                    <option value="">Выбери оценку</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                </select>
+
+                <div class="homework-form-actions">
+                    <button type="submit" class="save-homework-button">
+                        Сохранить
+                    </button>
+                    <button type="button" class="cancel-homework-button"
+                            onclick="toggleGradeForm()">
+                        Отмена
+                    </button>
+                </div>
+            </form>
+
+            <div class="homework-group">
+                <h2>Успеваемость по предметам</h2>
+                <div class="grades-table-wrap">
+                    <table class="grades-table">
+                        <thead>
+                            <tr>
+                                <th>Предмет</th>
+                                <th>Оценки</th>
+                                <th>Средний балл</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gradesTableBody"></tbody>
+                    </table>
+                </div>
+                <p id="gradesEmptyMessage" class="empty-message">
+                    Пока оценок нет. Добавь первую!
+                </p>
+            </div>
+        </section>
+                <section id="profileSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
+
+            <div class="section-heading">
+                <h1>Мой профиль</h1>
+                <p>Настрой свой профиль</p>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-avatar-wrapper">
+                    <img id="profileAvatar" class="profile-avatar"
+                         alt="Аватарка" hidden>
+                    <div id="profileAvatarPlaceholder"
+                         class="profile-avatar-placeholder">👤</div>
                 </div>
 
-                <div id="homeWeekDays" class="calendar-week"></div>
+                <label for="avatarInput" class="avatar-upload">
+                    📷 Загрузить фотографию
+                </label>
+                <input type="file" id="avatarInput"
+                       accept="image/*" hidden>
 
-                <div class="home-day-homework">
-                    <p>Нажми на день, чтобы посмотреть домашние задания.</p>
+                <h2 id="profileFullName">Твой профиль</h2>
+                <p id="profileUsername">Ученик</p>
+
+                <form id="profileForm" class="profile-form">
+                    <label for="profileFirstName">Имя</label>
+                    <input id="profileFirstName" type="text"
+                           placeholder="Введи имя" maxlength="40" required>
+
+                    <label for="profileLastName">Фамилия</label>
+                    <input id="profileLastName" type="text"
+                           placeholder="Введи фамилию" maxlength="40">
+
+                    <button type="submit" class="profile-save-button">
+                        Сохранить профиль
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="dayHomeworkSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
+
+            <div class="section-heading">
+                <h1 id="dayHomeworkTitle">Домашние задания</h1>
+                <p>Задания на выбранный день</p>
+            </div>
+
+            <div id="dayHomeworkList" class="homework-list"></div>
+        </section>
+
+        <section id="settingsSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
+
+            <div class="section-heading">
+                <h1>Настройки</h1>
+                <p>Настрой приложение под себя</p>
+            </div>
+
+            <div class="settings-menu">
+                <button class="settings-menu-item" type="button"
+                        onclick="showSection('profile')">
+                    <span class="settings-menu-icon">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21a8 8 0 0 1 16 0"></path>
+                        </svg>
+                    </span>
+                    <span class="settings-menu-title">Мой профиль</span>
+                    <span class="settings-menu-arrow">→</span>
+                </button>
+
+                <h2>Аккаунт</h2>
+
+                <button class="settings-menu-item" type="button"
+                        onclick="showSection('notifications')">
+                    <span class="settings-menu-icon">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                            <path d="M10 21h4"/>
+                        </svg>
+                    </span>
+                    <span class="settings-menu-title">Уведомления</span>
+                    <span class="settings-menu-arrow">→</span>
+                </button>
+
+                <button class="settings-menu-item" type="button"
+                        onclick="showSection('about')">
+                    <span class="settings-menu-icon">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 11v5"></path>
+                            <path d="M12 7.5h.01"></path>
+                        </svg>
+                    </span>
+                    <span class="settings-menu-title">О приложении</span>
+                    <span class="settings-menu-arrow"></span>
+                </button>
+
+                <button class="settings-menu-item" type="button"
+                        onclick="showSection('appearance')">
+                    <span class="settings-menu-icon">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 3v9h9M7 7h.01M7 12h.01M7 17h.01"/>
+                        </svg>
+                    </span>
+                    <span class="settings-menu-title">Оформление</span>
+                    <span class="settings-menu-arrow">→</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="notificationsSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('settings')">
+                ← К настройкам
+            </button>
+
+            <div class="section-heading">
+                <h1>Уведомления</h1>
+                <p>Настрой сообщения от бота</p>
+            </div>
+
+            <div class="settings-card">
+                <h2>Уведомления</h2>
+                <p class="settings-description">
+                    Выбирай, какие сообщения получать от бота.
+                </p>
+
+                <label class="settings-option">
+                    <span>
+                        <strong>Начало урока</strong>
+                        <small>Напоминание перед началом пары</small>
+                    </span>
+                    <input id="notifyLesson" type="checkbox">
+                    <span class="settings-switch"></span>
+                </label>
+
+                <label class="settings-option">
+                    <span>
+                        <strong>Перерыв</strong>
+                        <small>Сообщение о начале перерыва</small>
+                    </span>
+                    <input id="notifyBreak" type="checkbox">
+                    <span class="settings-switch"></span>
+                </label>
+
+                <label class="settings-option">
+                    <span>
+                        <strong>Расписание утром</strong>
+                        <small>Расписание на сегодня утром</small>
+                    </span>
+                    <input id="notifyMorning" type="checkbox">
+                    <span class="settings-switch"></span>
+                </label>
+
+                <label class="settings-option">
+                    <span>
+                        <strong>Расписание вечером</strong>
+                        <small>Расписание на следующий день вечером</small>
+                    </span>
+                    <input id="notifyEvening" type="checkbox">
+                    <span class="settings-switch"></span>
+                </label>
+            </div>
+
+            <div class="schedule-setup-entry">
+                <div class="schedule-setup-entry-text">
+                    <h3>Учебное расписание</h3>
+                    <p>Настрой пары, предметы и время перемен под себя.</p>
                 </div>
-            </section>
 
+                <button type="button" class="schedule-setup-button"
+                        onclick="openScheduleSetup()">
+                    <span>Настроить расписание</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+            </div>
 
-<div class="feature-cards">
+            <div id="scheduleRequiredNotice"
+                 class="schedule-required-notice" hidden>
+                <span class="schedule-required-icon">!</span>
+                <div>
+                    <strong>Сначала настрой расписание</strong>
+                    <p>Заполни учебное расписание и сохрани его, чтобы включить уведомления.</p>
+                </div>
+            </div>
+        </section>
 
+        <section id="devicesSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('settings')">
+                ← К настройкам
+            </button>
+            <div class="section-heading">
+                <h1>Устройства</h1>
+                <p>Управление подключёнными устройствами</p>
+            </div>
+            <div class="settings-card">
+                <p>Раздел пока в разработке.</p>
+            </div>
+        </section>
 
-<button class="feature-card homework-card"
-        onclick="showSection('homework')">
+        <section id="appearanceSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('settings')">
+                ← К настройкам
+            </button>
 
-    <span class="feature-icon-box">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/>
-            <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"/>
-            <path d="M8 7h7M8 10h7"/>
-        </svg>
-    </span>
+            <div class="section-heading">
+                <h1>Оформление</h1>
+                <p>Выбери тему для своего дневника</p>
+            </div>
 
-    <div class="feature-text">
-        <h2>Домашние задания</h2>
-        <p>Всё, что задали по предметам.</p>
-    </div>
+            <div class="settings-card theme-settings-card">
+                <h2>Тема приложения</h2>
+                <p class="settings-description">
+                    Измени внешний вид приложения в любое время.
+                </p>
 
-    <span class="feature-arrow">✦</span>
-</button>
+                <button type="button" class="theme-choice"
+                        data-theme-choice="dark">
+                    <span class="theme-preview dark-preview">
+                        <span></span><span></span><span></span>
+                    </span>
+                    <span class="theme-choice-text">
+                        <strong>Тёмная тема</strong>
+                        <small>Чёрный фон и бирюзовые акценты</small>
+                    </span>
+                    <span class="theme-check" id="darkThemeCheck">✓</span>
+                </button>
 
+                <button type="button" class="theme-choice"
+                        data-theme-choice="light">
+                    <span class="theme-preview light-preview">
+                        <span></span><span></span><span></span>
+                    </span>
+                    <span class="theme-choice-text">
+                        <strong>Светлая тема</strong>
+                        <small>Белый фон и бирюзовые акценты</small>
+                    </span>
+                    <span class="theme-check" id="lightThemeCheck"></span>
+                </button>
+            </div>
+        </section>
 
-    <div class="small-cards">
+        <section id="supportSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
 
+            <div class="section-heading">
+                <h1>Поддержка</h1>
+                <p>Поможем сделать FLOWLY лучше</p>
+            </div>
 
-<button class="feature-card small-feature-card files-card"
-        onclick="showSection('files')">
+            <div class="settings-card support-form-card">
+                <div class="support-form-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                        <path d="m3 7 9 7 9-7"/>
+                    </svg>
+                </div>
 
-    <span class="feature-icon-box">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/>
-            <path d="M3 9h18"/>
-        </svg>
-    </span>
+                <h2>Обратная связь</h2>
+                <p class="support-form-description">
+                    Нашёл ошибку или есть идея? Напиши нам!
+                </p>
 
-    <div class="feature-text">
-        <h2>Мои файлы</h2>
-        <p>Учебные материалы</p>
-    </div>
+                <form id="supportForm">
+                    <label for="supportType">Тип обращения</label>
+                    <select id="supportType" name="type" required>
+                        <option value="Ошибка">Сообщить об ошибке</option>
+                        <option value="Предложение">Предложить улучшение</option>
+                        <option value="Вопрос">Задать вопрос</option>
+                    </select>
 
-    <span class="feature-arrow">✦</span>
-</button>
+                    <label for="supportSubject">Тема</label>
+                    <input id="supportSubject" name="subject" type="text"
+                           maxlength="100"
+                           placeholder="Кратко опиши проблему" required>
 
-<button class="feature-card small-feature-card grades-card"
-        onclick="showSection('grades')">
+                    <label for="supportMessage">Описание</label>
+                    <textarea id="supportMessage" name="message" rows="5"
+                              maxlength="2000"
+                              placeholder="Расскажи подробнее..."
+                              required></textarea>
 
-    <span class="feature-icon-box">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-            <path d="m12 3 9 5-9 5-9-5z"/>
-            <path d="M7 11v5c3 2.5 7 2.5 10 0v-5"/>
-            <path d="M21 8v6"/>
-        </svg>
-    </span>
+                    <button class="support-submit-button" type="submit">
+                        <span>Отправить обращение</span>
+                        <span>→</span>
+                    </button>
 
-    <div class="feature-text">
-        <h2>Мои оценки</h2>
-        <p>Средний балл</p>
-    </div>
+                    <p id="supportFormStatus" class="support-form-status"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
 
-    <span class="feature-arrow">✦</span>
-</button>
+        <section id="aboutSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('settings')">
+                ← К настройкам
+            </button>
 
+            <div class="section-heading">
+                <h1>О приложении</h1>
+                <p>Твой учебный дневник нового поколения</p>
+            </div>
 
-    </div>
+            <div class="settings-card about-card">
+                <img src="flowly-logo.png" alt="FLOWLY"
+                     class="about-logo-image">
+                <h2>FLOWLY</h2>
+                <p>Твой личный учебный дневник</p>
+                <span class="about-version">Версия 1.0</span>
+            </div>
+        </section>
+
+        <section id="filesSection" class="content-section" hidden>
+            <button class="back-button" onclick="showSection('home')">
+                ← На главную
+            </button>
+
+            <div class="section-heading">
+                <h1>Мои файлы</h1>
+                <p>Твои учебные материалы в одном месте</p>
+            </div>
+
+            <div class="settings-card">
+                <h2>Добавить учебный файл</h2>
+                <p>Выбери документ или фотографию с устройства.</p>
+
+                <label for="studySubjectInput" class="study-field-label">
+                    Предмет
+                </label>
+                <input id="studySubjectInput"
+                       class="study-subject-input"
+                       type="text" maxlength="60"
+                       placeholder="Например, Информатика">
+
+                <label for="studyFilesInput" class="study-field-label">
+                    Файлы
+                </label>
+                <label for="studyFilesInput" class="study-file-picker">
+                    <span class="study-file-picker-icon">↑</span>
+                    <span class="study-file-picker-text">
+                        <strong>Выбрать файлы</strong>
+                        <small>PDF, Word, Excel, изображения</small>
+                    </span>
+                    <span class="study-file-picker-arrow">→</span>
+                </label>
+
+                <input id="studyFilesInput"
+                       class="study-files-input"
+                       type="file" multiple
+                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png">
+
+                <button type="button" class="support-submit-button"
+                        onclick="addStudyFiles()">
+                    Добавить файлы
+                </button>
+            </div>
+
+            <div class="settings-card">
+                <h2>Загруженные файлы</h2>
+                <div id="studyFilesList">Пока файлов нет.</div>
+            </div>
+        </section>
+
+        <section id="scheduleSetupSection"
+                 class="content-section schedule-setup-section" hidden>
+            <button type="button" class="back-button"
+                    onclick="showSection('notifications')">
+                ← К уведомлениям
+            </button>
+
+            <div class="section-heading">
+                <h1>Настройка расписания</h1>
+                <p>Настрой FLOWLY под свой учебный график.</p>
+            </div>
+
+            <div class="schedule-setup-step" id="scheduleStep1">
+                <p class="schedule-step-label">ШАГ 1 ИЗ 3</p>
+                <h3>Где ты учишься?</h3>
+
+                <label class="schedule-option">
+                    <input type="radio" name="educationType" value="school">
+                    <span>Школа</span>
+                </label>
+
+                <label class="schedule-option">
+                    <input type="radio" name="educationType" value="college">
+                    <span>Колледж</span>
+                </label>
+
+                <label class="schedule-option">
+                    <input type="radio" name="educationType" value="institute">
+                    <span>Институт / университет</span>
+                </label>
+
+                <button type="button" class="schedule-setup-button"
+                        onclick="goToScheduleStep(2)">
+                    Далее →
+                </button>
+            </div>
+
+            <div class="schedule-setup-step" id="scheduleStep2" hidden>
+                <p class="schedule-step-label">ШАГ 2 ИЗ 3</p>
+                <h3>Расписание занятий</h3>
+                <p>Выбери день и добавь занятия.</p>
+
+                <label for="scheduleDay">День недели</label>
+                <select id="scheduleDay">
+                    <option value="1">Понедельник</option>
+                    <option value="2">Вторник</option>
+                    <option value="3">Среда</option>
+                    <option value="4">Четверг</option>
+                    <option value="5">Пятница</option>
+                    <option value="6">Суббота</option>
+                    <option value="0">Воскресенье</option>
+                </select>
+
+                <div id="scheduleLessonsList"></div>
+
+                <button type="button" class="schedule-secondary-button"
+                        onclick="addScheduleLesson()">
+                    + Добавить пару
+                </button>
+
+                <div class="schedule-setup-actions">
+                    <button type="button" class="schedule-secondary-button"
+                            onclick="goToScheduleStep(1)">
+                        Назад
+                    </button>
+                    <button type="button" class="schedule-setup-button"
+                            onclick="goToScheduleStep(3)">
+                        Далее →
+                    </button>
+                </div>
+            </div>
+
+            <div class="schedule-setup-step" id="scheduleStep3" hidden>
+                <p class="schedule-step-label">ШАГ 3 ИЗ 3</p>
+                <h3>Перемены</h3>
+
+                <label class="schedule-option">
+                    <input type="radio" name="breakMode"
+                           value="duration" checked>
+                    <span>Указывать длительность перемены</span>
+                </label>
+
+                <label class="schedule-option">
+                    <input type="radio" name="breakMode" value="exact">
+                    <span>Указывать точное время перемен</span>
+                </label>
+
+                <div id="scheduleBreakSettings"></div>
+
+                <div class="schedule-setup-actions">
+                    <button type="button" class="schedule-secondary-button"
+                            onclick="goToScheduleStep(2)">
+                        Назад
+                    </button>
+                    <button type="button" class="schedule-setup-button"
+                            onclick="saveScheduleSetup()">
+                        Сохранить
+                    </button>
+                </div>
+
+                <p id="scheduleSetupStatus" role="status"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-pill">
+            <button class="nav-item active" type="button"
+                    aria-label="Главная"
+                    onclick="showSection('home')">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 10.5 12 3l9 7.5"></path>
+                    <path d="M5.5 9.5V20h13V9.5"></path>
+                    <path d="M9.5 20v-6h5v6"></path>
+                </svg>
+            </button>
+
+            <button class="nav-item" type="button"
+                    aria-label="Задания"
+                    onclick="showSection('homework')">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="6" y="5" width="12" height="16" rx="2"></rect>
+                    <path d="M9 5V3h6v2M9 10h6M9 14h6M9 18h4"></path>
+                </svg>
+            </button>
+
+            <button class="nav-item" type="button"
+                    aria-label="Оценки"
+                    onclick="showSection('grades')">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="4" y="3" width="16" height="18" rx="3"></rect>
+                    <path d="M8 3v18"></path>
+                    <text x="13.5" y="15.5"
+                          text-anchor="middle"
+                          font-size="10"
+                          font-weight="600"
+                          fill="currentColor"
+                          stroke="none">5</text>
+                </svg>
+            </button>
+
+            <button class="nav-item" type="button"
+                    aria-label="Настройки"
+                    onclick="showSection('settings')">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="14" cy="12.5" r="2.5"></circle>
+                    <path d="m19.4 13.5 1.1.9-1.5 2.6-1.4-.5a7.8 7.8 0 0 1-1.7 1l-.2 1.5h-3l-.4-1.5a7.8 7.8 0 0 1-1.7-1l-1.4.5-1.5-2.6 1.1-.9a7.2 7.2 0 0 1 0-2l-1.1-.9 1.5-2.6 1.4.5a7.8 7.8 0 0 1 1.7-1l.4-1.5h3l.2 1.5a7.8 7.8 0 0 1 1.7 1l1.4-.5 1.5 2.6-1.1.9a7.2 7.2 0 0 1 0 2Z"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div class="nav-labels">
+            <span>Главная</span>
+            <span>Задания</span>
+            <span>Оценки</span>
+            <span>Настройки</span>
+        </div>
+    </nav>
+
 </div>
 
-<section class="support-home-card" id="supportHomeCard">
-    <button class="support-button" onclick="showSection('support')">
-        <span class="support-icon">✉</span>
-        <span class="support-button-text">
-            <strong>Поддержка</strong>
-            <small>Сообщить об ошибке или предложить улучшение</small>
-        </span>
-        <span class="support-arrow">✦</span>
-    </button>
-</section>
-
-
-
-<section id="homeworkSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1>Домашние задания</h1>
-        <p>Все задания по предметам</p>
-    </div>
-
-    <button class="add-homework-button" onclick="toggleHomeworkForm()">
-        <span>＋</span> Добавить ДЗ
-    </button>
-
-    <form id="homeworkForm" class="homework-form" hidden>
-        <h2>Новое задание</h2>
-
-        <label for="homeworkSubject">Предмет</label>
-        <select id="homeworkSubject" required>
-            <option value="">Выбери предмет</option>
-            <option>Математика</option>
-            <option>Русский язык</option>
-            <option>Литература</option>
-            <option>Английский язык</option>
-            <option>Информатика</option>
-            <option>История</option>
-            <option>Обществознание</option>
-            <option>Физика</option>
-            <option>Химия</option>
-            <option>Биология</option>
-            <option>География</option>
-            <option>Физкультура</option>
-            <option>ОБЖ</option>
-            <option>Другое</option>
-        </select>
-
-        <label for="homeworkDescription">Что задали?</label>
-        <textarea
-            id="homeworkDescription"
-            placeholder="Напиши задание..."
-            rows="3"
-            required
-        ></textarea>
-
-
-    <label for="homeworkDay">День недели</label>
-    <select id="homeworkDay" required>
-        <option value="">Выбери день</option>
-        <option value="1">Понедельник</option>
-        <option value="2">Вторник</option>
-        <option value="3">Среда</option>
-        <option value="4">Четверг</option>
-        <option value="5">Пятница</option>
-        <option value="6">Суббота</option>
-        <option value="0">Воскресенье</option>
-    </select>
-
-
-        <div class="homework-form-actions">
-            <button type="submit" class="save-homework-button">
-                Сохранить
-            </button>
-            <button type="button" class="cancel-homework-button"
-                    onclick="toggleHomeworkForm()">
-                Отмена
-            </button>
-        </div>
-    </form>
-
-    <div class="homework-group">
-        <h2>На завтра</h2>
-        <div id="tomorrowHomework" class="homework-list"></div>
-    </div>
-
-    <div class="homework-group">
-        <h2>Все задания</h2>
-        <div id="allHomework" class="homework-list"></div>
-    </div>
-</section>
-
-
-
-<section id="gradesSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1>Мои оценки</h1>
-        <p>Оценки по предметам и средний балл</p>
-    </div>
-
-    <button class="add-homework-button" onclick="toggleGradeForm()">
-        ＋ Добавить оценку
-    </button>
-
-    <form id="gradeForm" class="homework-form" hidden>
-        <h2>Новая оценка</h2>
-
-        <label for="gradeSubject">Предмет</label>
-        <select id="gradeSubject" required>
-            <option value="">Выбери предмет</option>
-            <option>Математика</option>
-            <option>Русский язык</option>
-            <option>Литература</option>
-            <option>Английский язык</option>
-            <option>Информатика</option>
-            <option>История</option>
-            <option>Обществознание</option>
-            <option>Физика</option>
-            <option>Химия</option>
-            <option>Биология</option>
-            <option>География</option>
-            <option>Физкультура</option>
-            <option>ОБЖ</option>
-            <option>Другое</option>
-        </select>
-
-        <label for="gradeValue">Оценка</label>
-        <select id="gradeValue" required>
-            <option value="">Выбери оценку</option>
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-        </select>
-
-        <div class="homework-form-actions">
-            <button type="submit" class="save-homework-button">
-                Сохранить
-            </button>
-            <button type="button" class="cancel-homework-button"
-                    onclick="toggleGradeForm()">
-                Отмена
-            </button>
-        </div>
-    </form>
-
-    <div class="homework-group">
-        <h2>Успеваемость по предметам</h2>
-
-        <div class="grades-table-wrap">
-            <table class="grades-table">
-                <thead>
-                    <tr>
-                        <th>Предмет</th>
-                        <th>Оценки</th>
-                        <th>Средний балл</th>
-                    </tr>
-                </thead>
-                <tbody id="gradesTableBody"></tbody>
-            </table>
-        </div>
-
-        <p id="gradesEmptyMessage" class="empty-message">
-            Пока оценок нет. Добавь первую!
-        </p>
-    </div>
-</section>
-
-
-
-
-<section id="profileSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1>Мой профиль</h1>
-        <p>Настрой свой профиль</p>
-    </div>
-
-    <div class="profile-card">
-        <div class="profile-avatar-wrapper">
-            <img id="profileAvatar" class="profile-avatar" alt="Аватарка" hidden>
-            <div id="profileAvatarPlaceholder" class="profile-avatar-placeholder">👤</div>
-        </div>
-
-        <label for="avatarInput" class="avatar-upload">
-            📷 Загрузить фотографию
-        </label>
-        <input type="file" id="avatarInput" accept="image/*" hidden>
-
-        <h2 id="profileFullName">Твой профиль</h2>
-        <p id="profileUsername">Ученик</p>
-
-        <form id="profileForm" class="profile-form">
-            <label for="profileFirstName">Имя</label>
-            <input id="profileFirstName" type="text" placeholder="Введи имя" maxlength="40" required>
-
-            <label for="profileLastName">Фамилия</label>
-            <input id="profileLastName" type="text" placeholder="Введи фамилию" maxlength="40">
-
-            <button type="submit" class="profile-save-button">
-                Сохранить профиль
-            </button>
-        </form>
-    </div>
-</section>
-
-<section id="dayHomeworkSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1 id="dayHomeworkTitle">Домашние задания</h1>
-        <p>Задания на выбранный день</p>
-    </div>
-
-    <div id="dayHomeworkList" class="homework-list"></div>
-</section>
-
-
-<section id="settingsSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1>Настройки</h1>
-        <p>Настрой приложение под себя</p>
-    </div>
-
-    <div class="settings-menu">
-
-<button class="settings-menu-item"
-        type="button"
-        onclick="showSection('profile')">
-    <span class="settings-menu-icon">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="4"></circle>
-            <path d="M4 21a8 8 0 0 1 16 0"></path>
-        </svg>
-    </span>
-    <span class="settings-menu-title">Мой профиль</span>
-    <span class="settings-menu-arrow">→</span>
-</button>
-
-        <h2>Аккаунт</h2>
-
-        <button class="settings-menu-item"
-                type="button"
-                onclick="showSection('notifications')">
-            <span class="settings-menu-icon">
-                <svg viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.8"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-                    <path d="M10 21h4"/>
-                </svg>
-            </span>
-            <span class="settings-menu-title">Уведомления</span>
-            <span class="settings-menu-arrow">→</span>
-        </button>
-
-
-<button class="settings-menu-item"
-        type="button"
-        onclick="showSection('about')">
-    <span class="settings-menu-icon">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M12 11v5"></path>
-            <path d="M12 7.5h.01"></path>
-        </svg>
-    </span>
-    <span class="settings-menu-title">О приложении</span>
-    <span class="settings-menu-arrow"></span>
-</button>
-
-
-        <button class="settings-menu-item"
-                type="button"
-                onclick="showSection('appearance')">
-            <span class="settings-menu-icon">
-                <svg viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.8"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="9"/>
-                    <path d="M12 3v9h9M7 7h.01M7 12h.01M7 17h.01"/>
-                </svg>
-            </span>
-            <span class="settings-menu-title">Оформление</span>
-            <span class="settings-menu-arrow">→</span>
-        </button>
-    </div>
-</section>
-
-<section id="notificationsSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('settings')">
-        ← К настройкам
-    </button>
-
-    <div class="section-heading">
-        <h1>Уведомления</h1>
-        <p>Настрой сообщения от бота</p>
-    </div>
-
-    <div class="settings-card">
-        <h2>Уведомления</h2>
-        <p class="settings-description">
-            Выбирай, какие сообщения получать от бота.
-        </p>
-
-        <label class="settings-option">
-            <span>
-                <strong>Начало урока</strong>
-                <small>Напоминание перед началом пары</small>
-            </span>
-            <input type="checkbox" checked>
-            <span class="settings-switch"></span>
-        </label>
-
-        <label class="settings-option">
-            <span>
-                <strong>Перерыв</strong>
-                <small>Сообщение о начале перерыва</small>
-            </span>
-            <input type="checkbox" checked>
-            <span class="settings-switch"></span>
-        </label>
-
-        <label class="settings-option">
-            <span>
-                <strong>Расписание утром</strong>
-                <small>Расписание на сегодня утром</small>
-            </span>
-            <input type="checkbox" checked>
-            <span class="settings-switch"></span>
-        </label>
-
-        <label class="settings-option">
-            <span>
-                <strong>Расписание вечером</strong>
-                <small>Расписание на следующий день вечером</small>
-            </span>
-            <input type="checkbox" checked>
-            <span class="settings-switch"></span>
-        </label>
-    </div>
-</section>
-
-<section id="devicesSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('settings')">
-        ← К настройкам
-    </button>
-    <div class="section-heading">
-        <h1>Устройства</h1>
-        <p>Управление подключёнными устройствами</p>
-    </div>
-    <div class="settings-card">
-        <p>Раздел пока в разработке.</p>
-    </div>
-</section>
-
-
-<section id="appearanceSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('settings')">
-        ← К настройкам
-    </button>
-
-    <div class="section-heading">
-        <h1>Оформление</h1>
-        <p>Выбери тему для своего дневника</p>
-    </div>
-
-    <div class="settings-card theme-settings-card">
-        <h2>Тема приложения</h2>
-        <p class="settings-description">
-            Измени внешний вид приложения в любое время.
-        </p>
-
-        <button type="button" class="theme-choice" data-theme-choice="dark">
-            <span class="theme-preview dark-preview">
-                <span></span><span></span><span></span>
-            </span>
-            <span class="theme-choice-text">
-                <strong>Тёмная тема</strong>
-                <small>Чёрный фон и бирюзовые акценты</small>
-            </span>
-            <span class="theme-check" id="darkThemeCheck">✓</span>
-        </button>
-
-        <button type="button" class="theme-choice" data-theme-choice="light">
-            <span class="theme-preview light-preview">
-                <span></span><span></span><span></span>
-            </span>
-            <span class="theme-choice-text">
-                <strong>Светлая тема</strong>
-                <small>Белый фон и бирюзовые акценты</small>
-            </span>
-            <span class="theme-check" id="lightThemeCheck"></span>
-        </button>
-    </div>
-</section>
-
-
-
-<section id="supportSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1>Поддержка</h1>
-        <p>Поможем сделать FLOWLY лучше</p>
-    </div>
-
-    <div class="settings-card support-form-card">
-        <div class="support-form-icon">
-            <svg viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="5" width="18" height="14" rx="2"/>
-                <path d="m3 7 9 7 9-7"/>
-            </svg>
-        </div>
-
-        <h2>Обратная связь</h2>
-        <p class="support-form-description">
-            Нашёл ошибку или есть идея? Напиши нам!
-        </p>
-
-        <form id="supportForm">
-            <label for="supportType">Тип обращения</label>
-            <select id="supportType" name="type" required>
-                <option value="Ошибка">Сообщить об ошибке</option>
-                <option value="Предложение">Предложить улучшение</option>
-                <option value="Вопрос">Задать вопрос</option>
-            </select>
-
-            <label for="supportSubject">Тема</label>
-            <input
-                id="supportSubject"
-                name="subject"
-                type="text"
-                maxlength="100"
-                placeholder="Кратко опиши проблему"
-                required
-            >
-
-            <label for="supportMessage">Описание</label>
-            <textarea
-                id="supportMessage"
-                name="message"
-                rows="5"
-                maxlength="2000"
-                placeholder="Расскажи подробнее..."
-                required
-            ></textarea>
-
-            <button class="support-submit-button" type="submit">
-                <span>Отправить обращение</span>
-                <span>→</span>
-            </button>
-
-            <p id="supportFormStatus" class="support-form-status"
-               role="status" aria-live="polite"></p>
-        </form>
-    </div>
-</section>
-
-
-
-
-<section id="aboutSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('settings')">
-        ← К настройкам
-    </button>
-
-    <div class="section-heading">
-        <h1>О приложении</h1>
-        <p>Твой учебный дневник нового поколения</p>
-    </div>
-
-    <div class="settings-card about-card">
-        <img
-            src="flowly-logo.png"
-            alt="FLOWLY"
-            class="about-logo-image"
-        >
-
-        <h2>FLOWLY</h2>
-        <p>Твой личный учебный дневник</p>
-        <span class="about-version">Версия 1.0</span>
-    </div>
-</section>
-
-<section id="filesSection" class="content-section" hidden>
-    <button class="back-button" onclick="showSection('home')">
-        ← На главную
-    </button>
-
-    <div class="section-heading">
-        <h1>Мои файлы</h1>
-        <p>Твои учебные материалы в одном месте</p>
-    </div>
-
-    <div class="settings-card">
-        <h2>Добавить учебный файл</h2>
-        <p>Выбери документ или фотографию с устройства.</p>
-
-
-<label for="studySubjectInput" class="study-field-label">
-    Предмет
-</label>
-
-<input
-    id="studySubjectInput"
-    class="study-subject-input"
-    type="text"
-    maxlength="60"
-    placeholder="Например, Информатика"
->
-
-<label for="studyFilesInput" class="study-field-label">
-    Файлы
-</label>
-
-<label for="studyFilesInput" class="study-file-picker">
-    <span class="study-file-picker-icon">↑</span>
-    <span class="study-file-picker-text">
-        <strong>Выбрать файлы</strong>
-        <small>PDF, Word, Excel, изображения</small>
-    </span>
-    <span class="study-file-picker-arrow">→</span>
-</label>
-
-<input
-    id="studyFilesInput"
-    class="study-files-input"
-    type="file"
-    multiple
-    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png"
->
-
-<button
-    type="button"
-    class="support-submit-button"
-    onclick="addStudyFiles()"
->
-    Сохранить
-</button>
-
-
-        <button
-            type="button"
-            class="support-submit-button"
-            onclick="addStudyFiles()"
-        >
-            Добавить файлы
-        </button>
-    </div>
-
-    <div class="settings-card">
-        <h2>Загруженные файлы</h2>
-        <div id="studyFilesList">Пока файлов нет.</div>
-    </div>
-</section>
-        </main>
-
-
-<nav class="bottom-nav">
-    <div class="nav-pill">
-        <button class="nav-item active"
-                type="button"
-                aria-label="Главная"
-                onclick="showSection('home')">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 10.5 12 3l9 7.5"></path>
-                <path d="M5.5 9.5V20h13V9.5"></path>
-                <path d="M9.5 20v-6h5v6"></path>
-            </svg>
-        </button>
-
-        <button class="nav-item"
-                type="button"
-                aria-label="Задания"
-                onclick="showSection('homework')">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="6" y="5" width="12" height="16" rx="2"></rect>
-                <path d="M9 5V3h6v2M9 10h6M9 14h6M9 18h4"></path>
-            </svg>
-        </button>
-
-        <button class="nav-item"
-                type="button"
-                aria-label="Оценки"
-                onclick="showSection('grades')">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="4" y="3" width="16" height="18" rx="3"></rect>
-                <path d="M8 3v18"></path>
-                <text x="13.5" y="15.5"
-                      text-anchor="middle"
-                      font-size="10"
-                      font-weight="600"
-                      fill="currentColor"
-                      stroke="none">5</text>
-            </svg>
-        </button>
-
-        <button class="nav-item"
-                type="button"
-                aria-label="Настройки"
-                onclick="showSection('settings')">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="14" cy="12.5" r="2.5"></circle>
-                <path d="m19.4 13.5 1.1.9-1.5 2.6-1.4-.5a7.8 7.8 0 0 1-1.7 1l-.2 1.5h-3l-.4-1.5a7.8 7.8 0 0 1-1.7-1l-1.4.5-1.5-2.6 1.1-.9a7.2 7.2 0 0 1 0-2l-1.1-.9 1.5-2.6 1.4.5a7.8 7.8 0 0 1 1.7-1l.4-1.5h3l.2 1.5a7.8 7.8 0 0 1 1.7 1l1.4-.5 1.5 2.6-1.1.9a7.2 7.2 0 0 1 0 2Z"></path>
-            </svg>
-        </button>
-    </div>
-
-    <div class="nav-labels">
-        <span>Главная</span>
-        <span>Задания</span>
-        <span>Оценки</span>
-        <span>Настройки</span>
-    </div>
-</nav>
-
-    </div>
-
-    <script src="app.js"></script>
+<script src="app.js"></script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </body>
 </html>

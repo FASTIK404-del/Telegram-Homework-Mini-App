@@ -3341,5 +3341,399 @@ body:has(.homework-form input:focus,
     font-size: 21px;
 }
 
+/* FLOWLY: уменьшаем расстояние до карточек */
+.home-week-section {
+    margin-bottom: 12px !important;
+    padding-bottom: 0 !important;
+}
+
+.home-week-section > p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.feature-cards {
+    margin-top: 0 !important;
+    gap: 10px !important;
+}
+
+.feature-card {
+    gap: 8px !important;
+}
+
+.small-feature-card {
+    gap: 6px !important;
+}
+
+/* FLOWLY: компактнее содержимое карточек */
+.feature-card {
+    column-gap: 8px !important;
+}
+
+.feature-card h2,
+.feature-card h3,
+.feature-card p {
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
+}
+
+.feature-card .feature-icon {
+    margin-right: 0 !important;
+}
+/* Исправление цвета заголовка «Поддержка» */
+.support-home-card h2,
+#supportHomeCard h2 {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* FLOWLY — плавные переключения */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: #00dcca;
+    cursor: pointer;
+}
+
+/* Плавная анимация кнопок и переключателей */
+button,
+.nav-item,
+.theme-choice,
+.settings-card label {
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+}
+
+/* Лёгкое нажатие */
+button:active,
+.nav-item:active,
+.theme-choice:active {
+    transform: scale(0.97);
+}
+
+/* Плавное появление активного состояния */
+.nav-item.active {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
+}
+
+/* Уважение системной настройки уменьшения анимации */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Карточка настройки расписания */
+.schedule-setup-entry {
+    margin-top: 22px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid rgba(16, 203, 187, 0.18);
+    border-radius: 22px;
+    background: linear-gradient(
+        145deg,
+        rgba(16, 203, 187, 0.07),
+        rgba(17, 27, 26, 0.96) 55%
+    );
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+
+.schedule-setup-entry-text h3 {
+    margin: 0 0 10px;
+    color: var(--text, #f4f8f7);
+    font-size: 20px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.schedule-setup-entry-text p {
+    margin: 0;
+    color: var(--muted, #8ba5a1);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Бирюзовая кнопка */
+.schedule-setup-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border: 1px solid rgba(16, 203, 187, 0.5);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #16d8c4, #0bb7a9);
+    color: #061412;
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 750;
+    cursor: pointer;
+
+    box-shadow: 0 5px 18px rgba(16, 203, 187, 0.13);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.schedule-setup-button:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 7px 24px rgba(16, 203, 187, 0.23);
+}
+
+.schedule-setup-button:active {
+    transform: scale(0.98);
+}
+
+.schedule-setup-button:focus-visible,
+.schedule-secondary-button:focus-visible {
+    outline: 2px solid #10cbbb;
+    outline-offset: 3px;
+}
+
+/* Адаптация под телефон */
+@media (max-width: 480px) {
+    .schedule-setup-entry {
+        padding: 18px;
+        gap: 14px;
+        border-radius: 18px;
+    }
+
+    .schedule-setup-entry-text h3 {
+        font-size: 18px;
+    }
+
+    .schedule-setup-entry-text p {
+        font-size: 13px;
+    }
+}
+
+.schedule-setup-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.schedule-setup-step {
+    padding: 20px;
+    border: 1px solid rgba(16, 203, 187, 0.18);
+    border-radius: 20px;
+    background: linear-gradient(
+        145deg,
+        rgba(16, 203, 187, 0.055),
+        rgba(17, 27, 26, 0.96)
+    );
+}
+
+.schedule-step-label {
+    color: #10cbbb;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.schedule-setup-step h3 {
+    color: var(--text, #f4f8f7);
+    margin: 10px 0 16px;
+    font-size: 21px;
+}
+
+.schedule-setup-step label {
+    display: block;
+    margin: 12px 0 7px;
+    color: var(--muted, #8ba5a1);
+    font-size: 13px;
+}
+
+.schedule-setup-step input:not([type="radio"]),
+.schedule-setup-step select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px;
+    color: var(--text, #f4f8f7);
+    background: #0b1413;
+    border: 1px solid rgba(164, 207, 201, 0.2);
+    border-radius: 11px;
+    font: inherit;
+    color-scheme: dark;
+}
+
+.schedule-option {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    margin: 10px 0 !important;
+    color: var(--text, #f4f8f7) !important;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(164, 207, 201, 0.12);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.schedule-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: #10cbbb;
+}
+
+.schedule-lesson-row,
+.schedule-break-row {
+    margin-top: 14px;
+    padding: 15px;
+    border: 1px solid rgba(164, 207, 201, 0.14);
+    border-radius: 15px;
+    background: rgba(5, 12, 11, 0.5);
+}
+
+.schedule-lesson-heading {
+    margin: 0 0 12px;
+    color: #10cbbb;
+}
+
+.schedule-time-fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+}
+
+.schedule-setup-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.schedule-secondary-button,
+.schedule-remove-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 11px;
+    font: inherit;
+    cursor: pointer;
+}
+
+.schedule-secondary-button {
+    color: #10cbbb;
+    background: rgba(16, 203, 187, 0.07);
+    border: 1px solid rgba(16, 203, 187, 0.3);
+}
+
+.schedule-remove-button {
+    color: #ff9999;
+    background: rgba(255, 90, 90, 0.06);
+    border: 1px solid rgba(255, 90, 90, 0.2);
+}
+
+.schedule-empty-message {
+    color: var(--muted, #8ba5a1);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#scheduleSetupStatus {
+    margin-top: 14px;
+    color: #10cbbb;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+@media (max-width: 360px) {
+    .schedule-setup-step {
+        padding: 14px;
+    }
+
+    .schedule-time-fields {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Единый размер кнопок настройки расписания */
+.schedule-setup-section .schedule-setup-button,
+.schedule-setup-section .schedule-secondary-button,
+.schedule-setup-section .schedule-remove-button {
+    box-sizing: border-box;
+    min-height: 48px;
+    height: 48px;
+    padding: 0 16px;
+    margin-top: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Основная кнопка */
+.schedule-setup-section .schedule-setup-button {
+    width: 100%;
+}
+
+/* Второстепенные кнопки */
+.schedule-setup-section .schedule-secondary-button,
+.schedule-setup-section .schedule-remove-button {
+    width: 100%;
+}
+
+/* Кнопки навигации — одинаковая высота */
+.schedule-setup-section .schedule-setup-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 18px;
+}
+
+.schedule-setup-section .schedule-setup-actions button {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+    margin: 0;
+}
+
+/* Кнопка добавления пары */
+.schedule-setup-section #scheduleStep2 > .schedule-secondary-button {
+    margin-top: 14px;
+}
+
+/* Удаление пары и перемены */
+.schedule-setup-section .schedule-lesson-row > .schedule-remove-button,
+.schedule-setup-section .schedule-break-row > .schedule-remove-button {
+    margin-top: 14px;
+}
+
+/* На телефоне текст не должен ломать высоту */
+.schedule-setup-section button {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
 
 

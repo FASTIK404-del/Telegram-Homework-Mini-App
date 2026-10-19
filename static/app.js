@@ -1,4 +1,4 @@
-const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about','support','files'];
+const pageNames = ['home', 'homework', 'calendar', 'grades', 'profile', 'dayHomework', 'settings', 'notifications', 'devices', 'appearance','about','support','files','scheduleSetup'];
 
 
 function showSection(name) {
@@ -33,6 +33,7 @@ function showSection(name) {
     devices: "devicesSection",
     about: "aboutSection",
     files: "filesSection",
+    scheduleSetup: "scheduleSetupSection",
 };
 
     Object.entries(sections).forEach(([sectionName, id]) => {
@@ -1028,6 +1029,598 @@ function addStudyFiles() {
     input.value = "";
     subjectInput.value = "";
 }
+
+/* ===== НАСТРОЙКА УЧЕБНОГО РАСПИСАНИЯ ===== */
+
+const SCHEDULE_STORAGE_KEY = "flowlyStudyScheduleSettings";
+
+const scheduleWeekdays = [
+    "Воскресенье",
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница",
+    "Суббота"
+];
+
+let scheduleDraft = createEmptySchedule();
+
+function createEmptySchedule() {
+    return {
+        educationType: "",
+        lessonsByDay: {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+            6: []
+        },
+        breakMode: "duration",
+        breakDuration: 10,
+        breaks: []
+    };
+}
+
+function loadSavedSchedule() {
+    try {
+        const saved = JSON.parse(
+            localStorage.getItem(SCHEDULE_STORAGE_KEY) || "null"
+        );
+
+        if (!saved || typeof saved !== "object") {
+            return createEmptySchedule();
+        }
+
+        const result = createEmptySchedule();
+
+        result.educationType = saved.educationType || "";
+        result.breakMode = saved.breakMode === "exact"
+            ? "exact"
+            : "duration";
+
+        result.breakDuration = Number(saved.breakDuration) || 10;
+
+        if (saved.lessonsByDay && typeof saved.lessonsByDay === "object") {
+            for (let day = 0; day <= 6; day++) {
+                const lessons = saved.lessonsByDay[day];
+
+                if (Array.isArray(lessons)) {
+                    result.lessonsByDay[day] = lessons
+                        .filter(item => item && typeof item === "object")
+                        .map(item => ({
+                            subject: String(item.subject || ""),
+                            start: String(item.start || ""),
+                            end: String(item.end || "")
+                        }));
+                }
+            }
+        }
+
+        if (Array.isArray(saved.breaks)) {
+            result.breaks = saved.breaks
+                .filter(item => item && typeof item === "object")
+                .map(item => ({
+                    start: String(item.start || ""),
+                    end: String(item.end || "")
+                }));
+        }
+
+        return result;
+    } catch (error) {
+        console.error("Не удалось загрузить расписание:", error);
+        return createEmptySchedule();
+    }
+}
+
+function openScheduleSetup() {
+    scheduleDraft = loadSavedSchedule();
+
+    document.querySelectorAll('input[name="educationType"]').forEach(input => {
+        input.checked = input.value === scheduleDraft.educationType;
+    });
+
+    const daySelect = document.getElementById("scheduleDay");
+
+    if (daySelect) {
+        daySelect.value = "1";
+    }
+
+    document.querySelectorAll('input[name="breakMode"]').forEach(input => {
+        input.checked = input.value === scheduleDraft.breakMode;
+    });
+
+    goToScheduleStep(1);
+    showSection("scheduleSetup");
+}
+
+function collectScheduleLessons() {
+    const daySelect = document.getElementById("scheduleDay");
+    const container = document.getElementById("scheduleLessonsList");
+
+    if (!daySelect || !container) return;
+
+    const day = daySelect.value;
+
+    scheduleDraft.lessonsByDay[day] = Array.from(
+        container.querySelectorAll(".schedule-lesson-row")
+    ).map(row => ({
+        subject: row.querySelector(".schedule-subject").value.trim(),
+        start: row.querySelector(".schedule-start").value,
+        end: row.querySelector(".schedule-end").value
+    }));
+}
+
+function renderScheduleLessons() {
+    const container = document.getElementById("scheduleLessonsList");
+    const daySelect = document.getElementById("scheduleDay");
+
+    if (!container || !daySelect) return;
+
+    const day = daySelect.value;
+    const lessons = scheduleDraft.lessonsByDay[day] || [];
+
+    container.replaceChildren();
+
+    if (lessons.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "schedule-empty-message";
+        empty.textContent = "Пока нет занятий. Нажми «Добавить пару».";
+        container.appendChild(empty);
+    }
+
+    lessons.forEach((lesson, index) => {
+        const row = document.createElement("div");
+        row.className = "schedule-lesson-row";
+
+        const heading = document.createElement("h4");
+        heading.className = "schedule-lesson-heading";
+        heading.textContent = `Пара ${index + 1}`;
+
+        const subjectLabel = document.createElement("label");
+        subjectLabel.textContent = "Предмет";
+
+        const subject = document.createElement("input");
+        subject.type = "text";
+        subject.className = "schedule-subject";
+        subject.placeholder = "Например, математика";
+        subject.maxLength = 100;
+        subject.value = lesson.subject;
+
+        const times = document.createElement("div");
+        times.className = "schedule-time-fields";
+
+        const startLabel = document.createElement("label");
+        startLabel.textContent = "Начало";
+
+        const start = document.createElement("input");
+        start.type = "time";
+        start.className = "schedule-start";
+        start.value = lesson.start;
+
+        const endLabel = document.createElement("label");
+        endLabel.textContent = "Конец";
+
+        const end = document.createElement("input");
+        end.type = "time";
+        end.className = "schedule-end";
+        end.value = lesson.end;
+
+        const startField = document.createElement("div");
+        startField.append(startLabel, start);
+
+        const endField = document.createElement("div");
+        endField.append(endLabel, end);
+
+        times.append(startField, endField);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "schedule-remove-button";
+        remove.textContent = "Удалить пару";
+
+        remove.addEventListener("click", () => {
+            collectScheduleLessons();
+            scheduleDraft.lessonsByDay[day].splice(index, 1);
+            renderScheduleLessons();
+        });
+
+        row.append(heading, subjectLabel, subject, times, remove);
+        container.appendChild(row);
+    });
+}
+
+function addScheduleLesson() {
+    collectScheduleLessons();
+
+    const day = document.getElementById("scheduleDay")?.value || "1";
+
+    scheduleDraft.lessonsByDay[day].push({
+        subject: "",
+        start: "",
+        end: ""
+    });
+
+    renderScheduleLessons();
+
+    const subjects = document.querySelectorAll(".schedule-subject");
+    subjects[subjects.length - 1]?.focus();
+}
+
+function renderScheduleBreaks() {
+    const container = document.getElementById("scheduleBreakSettings");
+
+    if (!container) return;
+
+    container.replaceChildren();
+
+    const mode = document.querySelector(
+        'input[name="breakMode"]:checked'
+    )?.value || "duration";
+
+    scheduleDraft.breakMode = mode;
+
+    if (mode === "duration") {
+        const label = document.createElement("label");
+        label.htmlFor = "scheduleBreakDuration";
+        label.textContent = "Длительность перемены (минуты)";
+
+        const input = document.createElement("input");
+        input.id = "scheduleBreakDuration";
+        input.type = "number";
+        input.min = "1";
+        input.max = "180";
+        input.value = String(scheduleDraft.breakDuration || 10);
+
+        input.addEventListener("input", () => {
+            scheduleDraft.breakDuration = Number(input.value);
+        });
+
+        container.append(label, input);
+        return;
+    }
+
+    const description = document.createElement("p");
+    description.textContent =
+        "Укажи начало и конец каждой перемены.";
+
+    container.appendChild(description);
+
+    if (scheduleDraft.breaks.length === 0) {
+        scheduleDraft.breaks.push({ start: "", end: "" });
+    }
+
+    scheduleDraft.breaks.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "schedule-break-row";
+
+        const startLabel = document.createElement("label");
+        startLabel.textContent = `Перемена ${index + 1} — начало`;
+
+        const start = document.createElement("input");
+        start.type = "time";
+        start.value = item.start;
+
+        start.addEventListener("input", () => {
+            scheduleDraft.breaks[index].start = start.value;
+        });
+
+        const endLabel = document.createElement("label");
+        endLabel.textContent = "Конец";
+
+        const end = document.createElement("input");
+        end.type = "time";
+        end.value = item.end;
+
+        end.addEventListener("input", () => {
+            scheduleDraft.breaks[index].end = end.value;
+        });
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "schedule-remove-button";
+        remove.textContent = "Удалить перемену";
+
+        remove.addEventListener("click", () => {
+            scheduleDraft.breaks.splice(index, 1);
+            renderScheduleBreaks();
+        });
+
+        row.append(startLabel, start, endLabel, end, remove);
+        container.appendChild(row);
+    });
+
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "schedule-secondary-button";
+    add.textContent = "+ Добавить перемену";
+
+    add.addEventListener("click", () => {
+        scheduleDraft.breaks.push({ start: "", end: "" });
+        renderScheduleBreaks();
+    });
+
+    container.appendChild(add);
+}
+
+function goToScheduleStep(step) {
+    if (step < 1 || step > 3) return;
+
+    if (step >= 2) {
+        const selected = document.querySelector(
+            'input[name="educationType"]:checked'
+        );
+
+        if (selected) {
+            scheduleDraft.educationType = selected.value;
+        }
+
+        if (!scheduleDraft.educationType) {
+            alert("Сначала выбери тип учебного заведения.");
+            return;
+        }
+    }
+
+    if (step >= 3) {
+        collectScheduleLessons();
+
+        const mode = document.querySelector(
+            'input[name="breakMode"]:checked'
+        )?.value;
+
+        if (mode) {
+            scheduleDraft.breakMode = mode;
+        }
+
+        if (scheduleDraft.breakMode === "duration") {
+            const input = document.getElementById("scheduleBreakDuration");
+
+            if (input) {
+                scheduleDraft.breakDuration = Number(input.value);
+            }
+        }
+
+        renderScheduleBreaks();
+    } else if (step === 2) {
+        renderScheduleLessons();
+    }
+
+    [1, 2, 3].forEach(number => {
+        const section = document.getElementById(`scheduleStep${number}`);
+
+        if (section) {
+            section.hidden = number !== step;
+        }
+    });
+
+    const status = document.getElementById("scheduleSetupStatus");
+
+    if (status) {
+        status.textContent = "";
+    }
+}
+
+function saveScheduleSetup() {
+    collectScheduleLessons();
+
+    const selectedEducation = document.querySelector(
+        'input[name="educationType"]:checked'
+    );
+
+    if (selectedEducation) {
+        scheduleDraft.educationType = selectedEducation.value;
+    }
+
+    const selectedMode = document.querySelector(
+        'input[name="breakMode"]:checked'
+    );
+
+    if (selectedMode) {
+        scheduleDraft.breakMode = selectedMode.value;
+    }
+
+    if (!scheduleDraft.educationType) {
+        alert("Выбери тип учебного заведения.");
+        goToScheduleStep(1);
+        return;
+    }
+
+    for (let day = 0; day <= 6; day++) {
+        for (const lesson of scheduleDraft.lessonsByDay[day]) {
+            if (!lesson.subject || !lesson.start || !lesson.end) {
+                alert(
+                    `Заполни предмет, начало и конец пары: ${scheduleWeekdays[day]}.`
+                );
+                document.getElementById("scheduleDay").value = String(day);
+                goToScheduleStep(2);
+                return;
+            }
+
+            if (lesson.start >= lesson.end) {
+                alert(
+                    `Время окончания пары должно быть позже начала: ${scheduleWeekdays[day]}.`
+                );
+                document.getElementById("scheduleDay").value = String(day);
+                goToScheduleStep(2);
+                return;
+            }
+        }
+    }
+
+    if (scheduleDraft.breakMode === "duration") {
+        const input = document.getElementById("scheduleBreakDuration");
+
+        if (input) {
+            scheduleDraft.breakDuration = Number(input.value);
+        }
+
+        if (
+            !Number.isFinite(scheduleDraft.breakDuration) ||
+            scheduleDraft.breakDuration < 1 ||
+            scheduleDraft.breakDuration > 180
+        ) {
+            alert("Укажи длительность перемены от 1 до 180 минут.");
+            return;
+        }
+    } else {
+        const incomplete = scheduleDraft.breaks.some(
+            item => !item.start || !item.end || item.start >= item.end
+        );
+
+        if (incomplete) {
+            alert("Проверь время начала и конца каждой перемены.");
+            return;
+        }
+    }
+
+    try {
+        localStorage.setItem(
+            SCHEDULE_STORAGE_KEY,
+            JSON.stringify(scheduleDraft)
+        );
+
+        const status = document.getElementById("scheduleSetupStatus");
+
+        if (status) {
+            status.textContent = "✓ Расписание успешно сохранено!";
+        }
+    } catch (error) {
+        console.error("Не удалось сохранить расписание:", error);
+        alert("Не удалось сохранить расписание в браузере.");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const daySelect = document.getElementById("scheduleDay");
+
+    if (daySelect) {
+        daySelect.addEventListener("change", () => {
+            collectScheduleLessons();
+            renderScheduleLessons();
+        });
+    }
+
+    document.querySelectorAll('input[name="breakMode"]').forEach(input => {
+        input.addEventListener("change", renderScheduleBreaks);
+    });
+});
+
+/* ===== НАСТРОЙКИ УВЕДОМЛЕНИЙ FLOWLY ===== */
+
+
+/* ===== НАСТРОЙКИ УВЕДОМЛЕНИЙ FLOWLY ===== */
+
+const NOTIFICATIONS_STORAGE_KEY = "flowlyNotificationSettings";
+
+const notificationIds = [
+    "notifyLesson",
+    "notifyBreak",
+    "notifyMorning",
+    "notifyEvening"
+];
+
+function loadNotificationSettings() {
+    try {
+        return JSON.parse(
+            localStorage.getItem(NOTIFICATIONS_STORAGE_KEY) || "{}"
+        );
+    } catch (error) {
+        console.error("Ошибка загрузки уведомлений:", error);
+        return {};
+    }
+}
+
+async function syncFlowlySettingsToServer() {
+    const telegram = window.Telegram?.WebApp;
+    const initData = telegram?.initData;
+
+    if (!initData) {
+        console.warn(
+            "FLOWLY: открой приложение через Telegram, чтобы синхронизировать настройки."
+        );
+        return;
+    }
+
+    const notifications = {};
+
+    notificationIds.forEach(id => {
+        const checkbox = document.getElementById(id);
+        notifications[id] = checkbox ? checkbox.checked : false;
+    });
+
+    let schedule = {};
+
+    try {
+        schedule = JSON.parse(
+            localStorage.getItem("flowlyStudyScheduleSettings") || "{}"
+        );
+    } catch (error) {
+        console.error("Ошибка чтения расписания:", error);
+    }
+
+    const response = await fetch("/api/notifications", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            initData,
+            notifications,
+            schedule
+        })
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+            `Ошибка сервера ${response.status}: ${errorText}`
+        );
+    }
+
+    console.log("FLOWLY: настройки синхронизированы с сервером.");
+}
+
+function saveNotificationSettings() {
+    const settings = {};
+
+    notificationIds.forEach(id => {
+        const checkbox = document.getElementById(id);
+
+        if (checkbox) {
+            settings[id] = checkbox.checked;
+        }
+    });
+
+    try {
+        localStorage.setItem(
+            NOTIFICATIONS_STORAGE_KEY,
+            JSON.stringify(settings)
+        );
+    } catch (error) {
+        console.error("Ошибка локального сохранения:", error);
+    }
+
+    syncFlowlySettingsToServer().catch(error => {
+        console.error("Не удалось синхронизировать настройки:", error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedSettings = loadNotificationSettings();
+
+    notificationIds.forEach(id => {
+        const checkbox = document.getElementById(id);
+
+        if (!checkbox) return;
+
+        checkbox.checked = savedSettings[id] === true;
+        checkbox.addEventListener("change", saveNotificationSettings);
+    });
+});
+
+
 
 
 
