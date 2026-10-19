@@ -223,7 +223,9 @@ class handler(BaseHTTPRequestHandler):
                  "message": "Не удалось сохранить настройки"}
             )
 
-            excepturllib.error.HTTPErroraserror:
+
+
+        except urllib.error.HTTPError as error:
             details = error.read().decode("utf-8", errors="replace")
             print(
                 f"Supabase HTTP error {error.code}: {details}",
@@ -254,3 +256,13 @@ class handler(BaseHTTPRequestHandler):
 
     def log_message(self, format, *args):
         pass
+
+        def do_GET(self):
+            return send_json(
+                self, 405,
+                {"ok": False, "message": "Используй POST"}
+            )
+
+        def log_message(self, format, *args):
+            pass
+
