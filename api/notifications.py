@@ -1,4 +1,4 @@
-
+import urllib.error
 import json
 import os
 import time
@@ -199,7 +199,23 @@ class handler(BaseHTTPRequestHandler):
                 self, 400,
                 {"ok": False, "message": "Некорректные данные"}
             )
-        except Exception:
+            except urllib.error.HTTPError as error:
+            details = error.read().decode("utf-8", errors="replace")
+            print(
+                f"Supabase HTTP error {error.code}: {details}",
+                flush=True
+            )
+            return send_json(
+                self, 502,
+                {"ok": False, "message": "Ошибка ответа Supabase"}
+            )
+
+        except Exception as error:
+            print(
+                f"notifications.py error: "
+                f"{type(error).__name__}: {error}",
+                flush=True
+            )
             return send_json(
                 self, 502,
                 {"ok": False,
