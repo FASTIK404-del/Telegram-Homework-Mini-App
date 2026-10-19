@@ -244,8 +244,11 @@ class handler(BaseHTTPRequestHandler):
             )
             return send_json(
                 self, 502,
-                {"ok": False,
-                 "message": "Не удалось сохранить настройки"}
+                {
+                    "ok": False,
+                    "message": "Не удалось сохранить настройки",
+                    "debug": f"{type(error).__name__}: {error}"
+                }
             )
 
     def do_GET(self):
