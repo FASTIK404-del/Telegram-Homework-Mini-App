@@ -98,6 +98,28 @@
             </div>
         </div>
 
+
+<button class="feature-card college-card"
+        type="button"
+        onclick="window.open('https://do.eduhouse.ru/login/index.php', '_blank')">
+    <span class="feature-icon-box">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="M2 9 12 3l10 6-10 6L2 9Z"/>
+            <path d="M6 11.5V17c4 3 8 3 12 0v-5.5"/>
+            <path d="M22 9v6"/>
+        </svg>
+    </span>
+    <div class="feature-text">
+        <h2>Электронный колледж</h2>
+        <p>Войти в учебный портал</p>
+    </div>
+    <span class="feature-arrow">↗</span>
+</button>
+
+
         <section class="support-home-card" id="supportHomeCard">
             <button class="support-button" onclick="showSection('support')">
                 <span class="support-icon">✉</span>
@@ -337,19 +359,6 @@
 
                 <h2>Аккаунт</h2>
 
-                <button class="settings-menu-item" type="button"
-                        onclick="showSection('notifications')">
-                    <span class="settings-menu-icon">
-                        <svg viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="1.8"
-                             stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-                            <path d="M10 21h4"/>
-                        </svg>
-                    </span>
-                    <span class="settings-menu-title">Уведомления</span>
-                    <span class="settings-menu-arrow">→</span>
-                </button>
 
                 <button class="settings-menu-item" type="button"
                         onclick="showSection('about')">
@@ -382,81 +391,6 @@
             </div>
         </section>
 
-        <section id="notificationsSection" class="content-section" hidden>
-            <button class="back-button" onclick="showSection('settings')">
-                ← К настройкам
-            </button>
-
-            <div class="section-heading">
-                <h1>Уведомления</h1>
-                <p>Настрой сообщения от бота</p>
-            </div>
-
-            <div class="settings-card">
-                <h2>Уведомления</h2>
-                <p class="settings-description">
-                    Выбирай, какие сообщения получать от бота.
-                </p>
-
-                <label class="settings-option">
-                    <span>
-                        <strong>Начало урока</strong>
-                        <small>Напоминание перед началом пары</small>
-                    </span>
-                    <input id="notifyLesson" type="checkbox">
-                    <span class="settings-switch"></span>
-                </label>
-
-                <label class="settings-option">
-                    <span>
-                        <strong>Перерыв</strong>
-                        <small>Сообщение о начале перерыва</small>
-                    </span>
-                    <input id="notifyBreak" type="checkbox">
-                    <span class="settings-switch"></span>
-                </label>
-
-                <label class="settings-option">
-                    <span>
-                        <strong>Расписание утром</strong>
-                        <small>Расписание на сегодня утром</small>
-                    </span>
-                    <input id="notifyMorning" type="checkbox">
-                    <span class="settings-switch"></span>
-                </label>
-
-                <label class="settings-option">
-                    <span>
-                        <strong>Расписание вечером</strong>
-                        <small>Расписание на следующий день вечером</small>
-                    </span>
-                    <input id="notifyEvening" type="checkbox">
-                    <span class="settings-switch"></span>
-                </label>
-            </div>
-
-            <div class="schedule-setup-entry">
-                <div class="schedule-setup-entry-text">
-                    <h3>Учебное расписание</h3>
-                    <p>Настрой пары, предметы и время перемен под себя.</p>
-                </div>
-
-                <button type="button" class="schedule-setup-button"
-                        onclick="openScheduleSetup()">
-                    <span>Настроить расписание</span>
-                    <span aria-hidden="true">→</span>
-                </button>
-            </div>
-
-            <div id="scheduleRequiredNotice"
-                 class="schedule-required-notice" hidden>
-                <span class="schedule-required-icon">!</span>
-                <div>
-                    <strong>Сначала настрой расписание</strong>
-                    <p>Заполни учебное расписание и сохрани его, чтобы включить уведомления.</p>
-                </div>
-            </div>
-        </section>
 
         <section id="devicesSection" class="content-section" hidden>
             <button class="back-button" onclick="showSection('settings')">
